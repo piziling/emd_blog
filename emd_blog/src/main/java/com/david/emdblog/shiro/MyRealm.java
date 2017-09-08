@@ -14,7 +14,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 /**
  * 自定义Realm
- * @author java1234_小锋
  *
  */
 public class MyRealm extends AuthorizingRealm{
