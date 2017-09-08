@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 博客类型 -->
+<mapper namespace="com.david.emdblog.dao.BlogTypeDao">
+	<resultMap type="BlogType" id="BlogTypeResult">
+		<result property="id" column="id" />
+		<result property="typeName" column="typeName" />
+		<result property="blogCount" column="blogCount" />
+		<result property="orderNo" column="orderNo" />
+	</resultMap>
+	
+	<!-- 根据id查询博客类型 -->
+	<select id="findById" parameterType="Integer" resultMap="BlogTypeResult">
+		select * from t_blogType where id=#{id}
+	</select>
+	
+</mapper>
