@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 博客实体类
+ * 博客实体类  文章实体类
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing

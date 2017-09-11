@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Java开源博客系统后台登录页面-Powered by java1234</title>
+<title>程序员小冰博客系统后台登录页面-Powered by David</title>
 <script src="${pageContext.request.contextPath}/static/bootstrap3/js/jquery-1.11.2.min.js"></script>
 <STYLE>
 body{
@@ -162,6 +162,8 @@ function checkForm(){
 <body>
 <DIV class="top_div">
 </DIV>
+<DIV class="div1">
+</DIV>
 <form action="${pageContext.request.contextPath}/blogger/login.do" method="post" onsubmit="return checkForm()">
 	<DIV style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
 		<DIV style="width: 165px; height: 96px; position: absolute;">
@@ -182,7 +184,7 @@ function checkForm(){
 	  	</P>
 		<DIV style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
 			<P style="margin: 0px 35px 20px 45px;">
-			<SPAN style="float: left;">Java开源博客系统</SPAN> 
+			<SPAN style="float: left;">后台管理系统</SPAN> 
 			<span><font color="red" id="error">${errorInfo }</font></span>
 	        <SPAN style="float: right;"> 
 	              <input type="submit" style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" value="登录"/> 
@@ -192,7 +194,7 @@ function checkForm(){
 	</DIV>
 </form>
 <div style="text-align:center;padding-top: 30px">
-Copyright © 2012-2016 Java知识分享网 版权所有
+Copyright © 2012-2018 程序员小冰 版权所有
 </div>
 </body>
 </html>

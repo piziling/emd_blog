@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pageTitle }-Powered by java1234</title>
+<title>${pageTitle }-Powered by David</title>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap3/css/bootstrap-theme.min.css">
@@ -35,8 +35,9 @@
 </head>
 <body>
 <div class="container">
+	  <%--<!-- 头部logo的定义 --> --%>
 	<jsp:include page="/foreground/common/head.jsp"/>
-	
+	  <%--<!-- 头部tab标题的定义 --> --%>
 	<jsp:include page="/foreground/common/menu.jsp"/>
 	
 	<div class="row">
@@ -50,9 +51,11 @@
 					<img src="${pageContext.request.contextPath}/static/images/user_icon.png"/>
 					博主信息
 				</div>
+				  <%--站长博主的头像 --%>
 				<div class="user_image">
 					<img src="${pageContext.request.contextPath}/static/userImages/${blogger.imageName }"/>
 				</div>
+				<%--站长博主的昵称，以及签名 --%>
 				<div class="nickName">${blogger.nickName }</div>
 				<div class="userSign">(${blogger.sign })</div>
 			</div>
@@ -103,7 +106,7 @@
 		
 		
 	</div>
-	
+	<%--底部的引入 --%>
 	<jsp:include page="/foreground/common/foot.jsp"/>
 </div>
 </body>

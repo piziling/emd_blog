@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.david.emdblog.constant.ApiUrl;
 import com.david.emdblog.constant.Constants;
 import com.david.emdblog.entity.Blog;
 import com.david.emdblog.entity.PageBean;
@@ -24,7 +25,7 @@ import com.david.emdblog.utils.PageUtils;
 import com.david.emdblog.utils.UtilFuns;
 
 /**
- * 主页的Controller
+ * 客户端主页的Controller
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -51,10 +52,10 @@ public class IndexController {
 		}
 		PageBean pageBean = new PageBean(Integer.parseInt(page), Constants.PAGE_SIZE);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start", pageBean.getStart());
-		map.put("size", pageBean.getPageSize());
-		map.put("typeId", typeId);
-		map.put("releaseDateStr", releaseDateStr);
+		map.put("start", pageBean.getStart());//开始第几页，
+		map.put("size", pageBean.getPageSize());//每页展示数量
+		map.put("typeId", typeId);//分类ID
+		map.put("releaseDateStr", releaseDateStr);//按日期查询
 		List<Blog> blogList = blogService.list(map);
 		for (Blog blog : blogList) {
 			List<String> imagesList = blog.getImagesList();
@@ -82,8 +83,21 @@ public class IndexController {
 		}
 		modelAndView.addObject("pageCode", PageUtils.genPagination(request.getContextPath() + "/index.html",
 				blogService.getTotal(map), Integer.parseInt(page), Constants.PAGE_SIZE, sBuilder.toString()));
-		modelAndView.addObject("mainPage","foreground/blog/list.jsp");
-		modelAndView.addObject("pageTitle","java博客系统");
+		modelAndView.addObject("mainPage", ApiUrl.FOREGROUND_BLOG_LIST);// 文章列表
+		modelAndView.addObject("pageTitle","首页:"+ Constants.BLOG_TITLE);// title标题
+		modelAndView.setViewName("mainTemp");
+		return modelAndView;
+	}
+	
+	
+	/**
+	 * 源码下载
+	 */
+	@RequestMapping("/download")
+	public ModelAndView download(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("mainPage",ApiUrl.FOREGROUND_SYSTEM_DOWNLOAD);
+		modelAndView.addObject("pageTitle","源码下载:"+Constants.BLOG_TITLE);
 		modelAndView.setViewName("mainTemp");
 		return modelAndView;
 	}

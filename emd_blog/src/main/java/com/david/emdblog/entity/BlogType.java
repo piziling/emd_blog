@@ -3,7 +3,7 @@ package com.david.emdblog.entity;
 import java.io.Serializable;
 
 /**
- * 博客类型Javabean
+ * 博客类型  文章类型，日志类型Javabean
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing

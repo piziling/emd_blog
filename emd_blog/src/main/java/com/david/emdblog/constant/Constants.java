@@ -10,7 +10,9 @@ package com.david.emdblog.constant;
  */
 public class Constants {
 	/* 当前用户sessionname */
-	public static final String SESSION_CURRENT_USER_INFO = "_SESSION_CURRENT_USER_INFO";
+	public static final String SESSION_CURRENT_USER_INFO = "currentUser";
 	/* 分页每页显示的总数量 */
 	public static final int PAGE_SIZE = 10;
+	//博客主页标题
+	public static final String BLOG_TITLE = "欢迎光临程序员小冰技术博客";
 }

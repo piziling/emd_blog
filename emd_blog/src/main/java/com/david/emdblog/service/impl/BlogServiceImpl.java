@@ -12,7 +12,7 @@ import com.david.emdblog.entity.Blog;
 import com.david.emdblog.service.BlogService;
 
 /**
- * 博客的业务层
+ * 博客，文章，日志的业务层
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
