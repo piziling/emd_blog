@@ -29,7 +29,7 @@
 		if(title==null || title==''){
 			alert("请输入标题！");
 		}else if(blogTypeId==null || blogTypeId==''){
-			alert("请选择博客类别！");
+			alert("请选择文章类别！");
 		}else if(content==null || content==''){
 			alert("请输入内容！");
 		}else{

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 博客 -->
+<!-- 博主信息 -->
 <mapper namespace="com.david.emdblog.dao.BloggerDao">
 	<resultMap type="Blogger" id="BloggerResult">
 		<result property="id" column="id" />
@@ -22,5 +22,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findBloggerByUsername" parameterType="String" resultMap="BloggerResult">
 		select * from t_blogger where userName=#{userName}
 	</select>
-
+	<!-- 更新blogger信息 -->
+	<update id="update" parameterType="Blogger">
+		update t_blogger
+		<set>
+			<if test="password!=null and password!=''">
+				password=#{password},
+			</if>
+			<if test="nickName!=null and nickName!=''">
+				nickName=#{nickName},
+			</if>
+			<if test="sign!=null and sign!=''">
+				sign=#{sign},
+			</if>
+			<if test="imageName!=null and imageName!=''">
+				imageName=#{imageName},
+			</if>
+		</set>
+		where id=1
+	</update>
 </mapper>

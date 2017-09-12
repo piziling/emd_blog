@@ -19,13 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select="com.david.emdblog.dao.BlogTypeDao.findById"></association>
 	</resultMap>
 
-	<!--根据发布日期，排序查询博客数量。 -->
-	<select id="countList" resultMap="BlogResult">
-		SELECT
-		DATE_FORMAT(releaseDate,'%Y年%m月') AS releaseDateStr ,COUNT(*) AS
-		blogCount FROM t_blog GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月') ORDER
-		BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC;
-	</select>
 	<!-- 根据标题，类型，日期分页查询。排序得到博客列表 -->
 	<select id="list" parameterType="Map" resultMap="BlogResult">
 		select * from t_blog
@@ -62,5 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
+	<!-- 根据日期分组查询博客,所有文章以及对应的数量 -->
+	<select id="countList" resultMap="BlogResult">
+		SELECT
+		DATE_FORMAT(releaseDate,'%Y年%m月') AS releaseDateStr ,COUNT(*) AS
+		blogCount FROM t_blog GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月') ORDER
+		BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC;
+	</select>
 
 </mapper>

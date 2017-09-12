@@ -49,7 +49,7 @@
 					return false;
 				}
 				if(newPassword!=newPassword2){
-					$.messager.alert("系统提示","确认密码输入错误！");
+					$.messager.alert("系统提示","两次输入的密码不一致！");
 					return false;
 				}
 				return true;

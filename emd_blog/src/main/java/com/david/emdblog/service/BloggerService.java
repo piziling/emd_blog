@@ -11,11 +11,16 @@ public interface BloggerService {
 	/**
 	 * 查询博主信息
 	 */
-	Blogger findBloggerInfo();
+	public Blogger findBloggerInfo();
+
 	/**
 	 * 根据用户名查找用户
 	 */
-	Blogger findBloggerByUsername(String userName);
+	public Blogger findBloggerByUsername(String userName);
 
-	
+	/**
+	 * 更新博主的信息
+	 */
+	public int update(Blogger blogger);
+
 }

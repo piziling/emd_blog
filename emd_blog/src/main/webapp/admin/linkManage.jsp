@@ -58,6 +58,7 @@
 	 }
 	
 	function saveLink(){
+		//根据保存表单返回的结果进行提示
 		 $("#fm").form("submit",{
 			url:url,
 			onSubmit:function(){
@@ -91,6 +92,8 @@
 </script>
 </head>
 <body style="margin: 1px">
+
+<%--这里会直接获取到友情链接的list列表 --%>
 <table id="dg" title="友情链接管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
    url="${pageContext.request.contextPath}/admin/link/list.do" fit="true" toolbar="#tb">
@@ -112,10 +115,10 @@
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
  </div>
  
- 
+ <%--添加友情链接的输入框 --%>
  <div id="dlg" class="easyui-dialog" style="width:500px;height:200px;padding: 10px 20px"
    closed="true" buttons="#dlg-buttons">
-   
+   <%-- 友情链接的内容管理表单 --%>
    <form id="fm" method="post">
    	<table cellspacing="8px">
    		<tr>

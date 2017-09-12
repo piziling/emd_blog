@@ -34,7 +34,14 @@ public class BloggerServiceImpl implements BloggerService {
 	 */
 	@Override
 	public Blogger findBloggerByUsername(String userName) {
-		// TODO Auto-generated method stub
 		return bloggerDao.findBloggerByUsername(userName);
+	}
+
+	/**
+	 * 更新博主的信息
+	 */
+	@Override
+	public int update(Blogger blogger) {
+		return bloggerDao.update(blogger);
 	}
 }

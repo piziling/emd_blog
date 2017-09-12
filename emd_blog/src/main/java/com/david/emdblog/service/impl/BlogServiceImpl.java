@@ -38,5 +38,12 @@ public class BlogServiceImpl implements BlogService{
 	public long getTotal(Map<String, Object> map) {
 		return blogDao.getTotal(map);
 	}
+	/**
+	 * 根据日期分组查询博客,所有文章以及对应的数量
+	 */
+	@Override
+	public List<Blog> countList() {
+		return blogDao.countList();
+	}
 
 }
