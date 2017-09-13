@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		t2.orderNo;
 	</select>
 	<!-- 获取到分类数量 -->
-	<select id="getTotal" resultMap="Long" parameterType="Map">
+	<select id="getTotal" resultType="Long" parameterType="Map">
 		select
 		count(*) from t_blogType
 	</select>
