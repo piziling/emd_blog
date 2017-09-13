@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${pageTitle }-Powered by David</title>
-
+<%--首页 --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap3/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/blog.css">
@@ -73,7 +73,7 @@
 					</ul>
 				</div>
 			</div>
-			
+			<%--因为这些信息默认存在context中 --%>
 			<div class="data_list">
 				<div class="data_list_title">
 					<img src="${pageContext.request.contextPath}/static/images/byDate_icon.png"/>
@@ -87,7 +87,7 @@
 					</ul>
 				</div>
 			</div>
-			
+			<%--因为这些信息默认存在context中 --%>
 			<div class="data_list">
 				<div class="data_list_title">
 					<img src="${pageContext.request.contextPath}/static/images/link_icon.png"/>

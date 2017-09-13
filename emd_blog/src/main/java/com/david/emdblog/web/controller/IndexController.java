@@ -43,6 +43,7 @@ public class IndexController {
 	 */
 	@RequestMapping("/index")
 	public ModelAndView index(@RequestParam(value = "page", required = false) String page,
+			@RequestParam(value = "rows", required = false) String rows,
 			@RequestParam(value = "typeId", required = false) String typeId,
 			@RequestParam(value = "releaseDateStr", required = false) String releaseDateStr,
 			HttpServletRequest request) {
@@ -50,17 +51,23 @@ public class IndexController {
 		if (UtilFuns.isEmpty(page) || UtilFuns.isEmpty(page.trim())) {
 			page = "1";
 		}
-		PageBean pageBean = new PageBean(Integer.parseInt(page), Constants.PAGE_SIZE);
+
+		if (UtilFuns.isEmpty(rows) || UtilFuns.isEmpty(rows.trim())) {
+			rows = Constants.PAGE_SIZE + "";
+		}
+		PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+		System.out.println("pageBean.getStart()"+pageBean.getStart());
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start", pageBean.getStart());//开始第几页，
-		map.put("size", pageBean.getPageSize());//每页展示数量
-		map.put("typeId", typeId);//分类ID
-		map.put("releaseDateStr", releaseDateStr);//按日期查询
+		map.put("start", pageBean.getStart());// 开始第几页，
+		map.put("size", pageBean.getPageSize());// 每页展示数量
+		map.put("typeId", typeId);// 分类ID
+		map.put("releaseDateStr", releaseDateStr);// 按日期查询
 		List<Blog> blogList = blogService.list(map);
 		for (Blog blog : blogList) {
 			List<String> imagesList = blog.getImagesList();
 			String blogInfo = blog.getContent();
 			Document document = Jsoup.parse(blogInfo);
+			// 博主图片默认是jpg的，这样才会显示
 			Elements jpgs = document.select("img[src$=.jpg]");// 查找扩展名为jpg的图片
 			for (int i = 0; i < jpgs.size(); i++) {
 				Element jpg = jpgs.get(i);
@@ -84,20 +91,19 @@ public class IndexController {
 		modelAndView.addObject("pageCode", PageUtils.genPagination(request.getContextPath() + "/index.html",
 				blogService.getTotal(map), Integer.parseInt(page), Constants.PAGE_SIZE, sBuilder.toString()));
 		modelAndView.addObject("mainPage", ApiUrl.FOREGROUND_BLOG_LIST);// 文章列表
-		modelAndView.addObject("pageTitle","首页:"+ Constants.BLOG_TITLE);// title标题
+		modelAndView.addObject("pageTitle", "首页:" + Constants.BLOG_TITLE);// title标题
 		modelAndView.setViewName("mainTemp");
 		return modelAndView;
 	}
-	
-	
+
 	/**
 	 * 源码下载
 	 */
 	@RequestMapping("/download")
-	public ModelAndView download(){
+	public ModelAndView download() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("mainPage",ApiUrl.FOREGROUND_SYSTEM_DOWNLOAD);
-		modelAndView.addObject("pageTitle","源码下载:"+Constants.BLOG_TITLE);
+		modelAndView.addObject("mainPage", ApiUrl.FOREGROUND_SYSTEM_DOWNLOAD);
+		modelAndView.addObject("pageTitle", "源码下载:" + Constants.BLOG_TITLE);
 		modelAndView.setViewName("mainTemp");
 		return modelAndView;
 	}

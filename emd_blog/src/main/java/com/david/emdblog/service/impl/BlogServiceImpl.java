@@ -45,5 +45,26 @@ public class BlogServiceImpl implements BlogService{
 	public List<Blog> countList() {
 		return blogDao.countList();
 	}
+	/**
+	 * 新增文章博客
+	 */
+	@Override
+	public int add(Blog blog) {
+		return blogDao.add(blog);
+	}
+	/**
+	 * 说明是更新博客 更新文章
+	 */
+	@Override
+	public int update(Blog blog) {
+		return blogDao.update(blog);
+	}
+	/**
+	 * 根据文章类型id,查找此目录下的文章
+	 */
+	@Override
+	public int getBlogByTypeId(int typeId) {
+	return blogDao.getBlogByTypeId(typeId);
+	}
 
 }

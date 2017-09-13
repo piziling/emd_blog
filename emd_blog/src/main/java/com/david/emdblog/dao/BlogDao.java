@@ -22,9 +22,29 @@ public interface BlogDao {
 	 * 获取博客总数量
 	 */
 	public long getTotal(Map<String, Object> map);
+
 	/**
 	 * 统计每个月写的文章数量
 	 */
 	public List<Blog> countList();
 
+	/**
+	 * 新增文章博客
+	 */
+	public int add(Blog blog);
+
+	/**
+	 * 则说明是更新博客 更新文章
+	 */
+	public int update(Blog blog);
+
+	/**
+	 * 根据ID查找实例
+	 */
+	public Blog findById(Integer id);
+
+	/**
+	 * 根据文章类型id,查找此目录下的文章
+	 */
+	public int getBlogByTypeId(int typeId);
 }

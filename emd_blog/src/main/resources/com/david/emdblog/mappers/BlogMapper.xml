@@ -63,4 +63,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC;
 	</select>
 
+	<!-- 新增文章博客 .now()当前时间。 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="id"
+		parameterType="Blog">
+		insert into t_blog
+		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord})
+	</insert>
+	<!-- 更新博客 更新文章 -->
+	<update id="update" parameterType="Blog">
+		update t_blog
+		<set>
+			<if test="title!=null and title!=''">
+				title=#{title},
+			</if>
+			<if test="summary!=null and summary!=''">
+				summary=#{summary},
+			</if>
+			<if test="content!=null and content!=''">
+				content=#{content},
+			</if>
+			<if test="typeId!=null and typeId!=''">
+				typeId=#{blogType.id},
+			</if>
+			<if test="clickHit!=null and clickHit!=''">
+				clickHit=#{clickHit},
+			</if>
+			<if test="replyHit!=null and replyHit!=''">
+				replyHit=#{replyHit},
+			</if>
+			<if test="keyWord!=null and keyWord!=''">
+				keyWord=#{keyWord},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	<!-- 根据id查询文章 -->
+	<select id="findById" parameterType="Integer" resultMap="BlogResult">
+		select *
+		from t_blog where id=#{id}
+	</select>
+	<!-- 根据文章类型id,查找此目录下的文章 -->
+	<select id="getBlogByTypeId" parameterType="Integer" resultType="Integer">
+		select count(*) from t_blog where typeId=#{typeId}
+	</select>
 </mapper>

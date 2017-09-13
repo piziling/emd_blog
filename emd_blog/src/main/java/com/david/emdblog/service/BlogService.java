@@ -18,5 +18,11 @@ public interface BlogService {
 	public long getTotal(Map<String, Object> map);
 
 	public List<Blog> countList();
+
+	public int add(Blog blog);
+
+	public int update(Blog blog);
+
+	public int getBlogByTypeId(int typeId);
 	
 }
