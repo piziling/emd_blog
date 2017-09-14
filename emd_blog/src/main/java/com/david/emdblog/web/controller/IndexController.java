@@ -21,6 +21,7 @@ import com.david.emdblog.constant.Constants;
 import com.david.emdblog.entity.Blog;
 import com.david.emdblog.entity.PageBean;
 import com.david.emdblog.service.BlogService;
+import com.david.emdblog.utils.CharsetUtils;
 import com.david.emdblog.utils.PageUtils;
 import com.david.emdblog.utils.UtilFuns;
 
@@ -51,18 +52,25 @@ public class IndexController {
 		if (UtilFuns.isEmpty(page) || UtilFuns.isEmpty(page.trim())) {
 			page = "1";
 		}
-
 		if (UtilFuns.isEmpty(rows) || UtilFuns.isEmpty(rows.trim())) {
 			rows = Constants.PAGE_SIZE + "";
 		}
 		PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
-		System.out.println("pageBean.getStart()"+pageBean.getStart());
+		System.out.println(
+				"pageBean.getStart()" + pageBean.getStart() + "pageBean.getPageSize()" + pageBean.getPageSize());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", pageBean.getStart());// 开始第几页，
 		map.put("size", pageBean.getPageSize());// 每页展示数量
 		map.put("typeId", typeId);// 分类ID
-		map.put("releaseDateStr", releaseDateStr);// 按日期查询
+		if (UtilFuns.isEmpty(releaseDateStr)) {
+			map.put("releaseDateStr", releaseDateStr);
+		} else {
+			map.put("releaseDateStr", CharsetUtils.getGetMethodParameter(releaseDateStr));// 按日期查询
+		}
+
+		// System.out.println(CharsetUtils.getGetMethodParameter(releaseDateStr));
 		List<Blog> blogList = blogService.list(map);
+		System.out.println(blogList.size());
 		for (Blog blog : blogList) {
 			List<String> imagesList = blog.getImagesList();
 			String blogInfo = blog.getContent();
@@ -77,6 +85,7 @@ public class IndexController {
 				}
 			}
 		}
+
 		modelAndView.addObject("blogList", blogList);
 		/**
 		 * 将我们查询的参数继续追加进去

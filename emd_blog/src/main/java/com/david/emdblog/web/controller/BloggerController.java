@@ -37,7 +37,7 @@ public class BloggerController {
 	public ModelAndView abountMe(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("blogger",bloggerService.findBloggerInfo());
-		modelAndView.addObject("mainPage",ApiUrl.FOREGROUND_BLOG_LIST);
+		modelAndView.addObject("mainPage",ApiUrl.FOREGROUND_BLOGGER_INFO);
 		modelAndView.addObject("pageTitle","关于博主:"+Constants.BLOG_TITLE);
 		modelAndView.setViewName("mainTemp");//转发的页面
 		return modelAndView;

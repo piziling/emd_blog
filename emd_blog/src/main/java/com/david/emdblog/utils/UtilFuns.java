@@ -21,6 +21,20 @@ import java.util.Date;
  */
 public class UtilFuns {
 
+	/**
+	 * 格式化模糊查询
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String formatLike(String str) {
+		if (isNotEmpty(str)) {
+			return "%" + str + "%";
+		} else {
+			return null;
+		}
+	}
+
 	static public String newLine() {
 		return System.getProperty("line.separator");
 	}
@@ -132,8 +146,6 @@ public class UtilFuns {
 	 * 输入参数：String str 设置返回系统时间样式 <br>
 	 * 输入参数：String SplitFlag 设置分割字符 <br>
 	 * 输出参数：string[] 返回分割后的数组 <br>
-	 * 作者：宋江 <br>
-	 * 时间：2003-9-7 <br>
 	 * 用法：
 	 */
 	/*
@@ -1493,5 +1505,21 @@ public class UtilFuns {
 
 	public String getClassRootPath() {
 		return this.getClass().getResource("/").getPath();
+	}
+
+	/**
+	 * 过滤掉集合里的空格
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static List<String> filterWhite(List<String> list) {
+		List<String> resultList = new ArrayList<String>();
+		for (String l : list) {
+			if (isNotEmpty(l)) {
+				resultList.add(l);
+			}
+		}
+		return resultList;
 	}
 }

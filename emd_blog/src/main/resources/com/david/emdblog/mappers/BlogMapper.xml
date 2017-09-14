@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		<!-- 排序以及分页放在where之后 -->
 		order by releaseDate desc
-		<if test="start!=null and size!=null and start!='' and size!=''">
+		<if test="start!=null and size!=null">
 			limit #{start},#{size}
 		</if>
 	</select>
@@ -82,13 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="content!=null and content!=''">
 				content=#{content},
 			</if>
-			<if test="typeId!=null and typeId!=''">
+			<if test="blogType.id!=null">
 				typeId=#{blogType.id},
 			</if>
-			<if test="clickHit!=null and clickHit!=''">
+			<if test="clickHit!=null ">
 				clickHit=#{clickHit},
 			</if>
-			<if test="replyHit!=null and replyHit!=''">
+			<if test="replyHit!=null">
 				replyHit=#{replyHit},
 			</if>
 			<if test="keyWord!=null and keyWord!=''">
@@ -105,5 +105,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 根据文章类型id,查找此目录下的文章 -->
 	<select id="getBlogByTypeId" parameterType="Integer" resultType="Integer">
 		select count(*) from t_blog where typeId=#{typeId}
+	</select>
+	<!-- 根据id删除文章 -->
+	<delete id="deleteById" parameterType="Integer">
+		delete from t_blog where id=#{id}
+	</delete>
+	<!-- 获取下一篇文章 -->
+	<select id="getNextBlog" parameterType="Integer" resultMap="BlogResult">
+		select * from t_blog where id&gt;#{id} order by id asc limit 1 
+	</select>
+	<!-- 获取上一篇文章 -->
+	<select id="getLastBlog" parameterType="Integer" resultMap="BlogResult">
+		select * from t_blog where id&lt;#{id} order by id desc limit 1
 	</select>
 </mapper>

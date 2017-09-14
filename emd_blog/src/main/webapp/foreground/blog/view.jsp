@@ -64,6 +64,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+		<%--这里设置上一页下一页的代码 --%>
 		<div class="blog_lastAndNextPage">
 			${pageCode }
 		</div>

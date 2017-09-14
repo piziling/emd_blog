@@ -35,6 +35,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="sign!=null and sign!=''">
 				sign=#{sign},
 			</if>
+			<if test="proFile!=null and proFile!=''">
+				proFile=#{proFile},
+			</if>
 			<if test="imageName!=null and imageName!=''">
 				imageName=#{imageName},
 			</if>

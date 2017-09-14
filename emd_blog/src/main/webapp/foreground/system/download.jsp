@@ -40,7 +40,7 @@
     V1.0 2016年2月2号发布
 </p>
 <p>
-    高清功能演示视频以及完整源码和数据库脚本下载地址：<a href="http://pan.baidu.com/s/1sk23EUD" target="_blank" title="http://pan.baidu.com/s/1sk23EUD">http://pan.baidu.com/s/1sk23EUD</a>
+下载地址：<a href="http://weibo.com/mcxiaobing" target="_blank" title="http://weibo.com/mcxiaobing">http://weibo.com/mcxiaobing</a>
 </p>
 <p>
     <br/>
@@ -49,7 +49,7 @@
     V2.0 2016年2月22号发布
 </p>
 <p>
-   完整源码和数据库脚本下载地址：<a href="http://pan.baidu.com/s/1eRfrsAm" target="_blank" title="http://pan.baidu.com/s/1eRfrsAm">http://pan.baidu.com/s/1eRfrsAm</a>
+   完整源码和数据库脚本下载地址：<a href="http://weibo.com/mcxiaobing" target="_blank" title="http://weibo.com/mcxiaobing">http://weibo.com/mcxiaobing</a>
 </p>
 <p>
 	修复一些bug;<br/>

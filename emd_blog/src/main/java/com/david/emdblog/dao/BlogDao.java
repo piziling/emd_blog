@@ -47,4 +47,19 @@ public interface BlogDao {
 	 * 根据文章类型id,查找此目录下的文章
 	 */
 	public int getBlogByTypeId(int typeId);
+
+	/**
+	 * 根据ID删除实例.
+	 */
+	public void deleteById(Integer id);
+
+	/**
+	 * 获取上一篇文章
+	 */
+	public Blog getLastBlog(Integer id);
+
+	/**
+	 * 获取下一篇文章
+	 */
+	public Blog getNextBlog(Integer id);
 }
