@@ -20,6 +20,11 @@
 	<!-- 导入静态资源 -->
 	<mvc:resources mapping="/static/**" location="/static/" />
 
+
+	<!-- 配置全局异常处理器 -->
+	<bean class="com.david.emdblog.exception.CustomGlobalExceptionResolver" />
+
+
 	<!-- 配置视图解析器 作用:在controller中指定页面路径的时候就不用写页面的完整路径名称了,可以直接写页面去掉扩展名的名称 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

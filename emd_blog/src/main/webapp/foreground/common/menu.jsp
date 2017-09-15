@@ -43,6 +43,11 @@
 						<li><a
 							href="${pageContext.request.contextPath}/blogger/aboutMe.html"><font
 								color="black"><strong>关于博主</strong></font></a></li>
+								
+									<li><a
+							href="https://github.com/QQ986945193" target="_blank"><font
+								color="black"><strong>github</strong></font></a></li>
+								
 						<li><a
 							href="${pageContext.request.contextPath}/download.html"><font
 								color="black"><strong>本站源码下载</strong></font></a></li>

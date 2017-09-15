@@ -12,4 +12,6 @@ public class ApiUrl {
 	public static final String FOREGROUND_BLOGGER_INFO = "foreground/blogger/info.jsp";
 	/*源码下载的页面*/
 	public static final String FOREGROUND_SYSTEM_DOWNLOAD = "foreground/system/download.jsp";
+	/*配置全局的异常处理页面*/
+	public static final String FOREGROUND_ERROR_ERROR = "foreground/error/error";
 }
