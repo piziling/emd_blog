@@ -34,6 +34,7 @@ import org.apache.lucene.search.highlight.SimpleSpanFragmenter;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import com.david.emdblog.constant.Constants;
 import com.david.emdblog.entity.Blog;
 import com.david.emdblog.utils.DateUtil;
 import com.david.emdblog.utils.UtilFuns;
@@ -46,20 +47,6 @@ import com.david.emdblog.utils.UtilFuns;
  * @GitHub: https://github.com/QQ986945193
  */
 public class BlogIndex {
-
-	private Directory directory = null;
-
-	/**
-	 * 获取IndexWriter实例
-	 */
-
-	private IndexWriter getWriter() throws Exception {
-		directory = FSDirectory.open(Paths.get("C://lucene"));
-		SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
-		IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
-		IndexWriter indexWriter = new IndexWriter(directory, indexWriterConfig);
-		return indexWriter;
-	}
 
 	/**
 	 * 更新文章博客索引
@@ -103,7 +90,22 @@ public class BlogIndex {
 		writer.addDocument(document);
 		if (writer != null) {
 			writer.close();
+
 		}
+	}
+
+	private Directory directory = null;
+
+	/**
+	 * 获取IndexWriter实例
+	 */
+
+	private IndexWriter getWriter() throws Exception {
+		directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
+		SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+		IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
+		IndexWriter indexWriter = new IndexWriter(directory, indexWriterConfig);
+		return indexWriter;
 	}
 
 	/**
@@ -115,7 +117,8 @@ public class BlogIndex {
 	 * @throws Exception
 	 */
 	public List<Blog> searchBlog(String q) throws Exception {
-		directory = FSDirectory.open(Paths.get("C://lucene"));
+		IndexWriter writer = getWriter();
+		directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
 		IndexReader reader = DirectoryReader.open(directory);
 		IndexSearcher is = new IndexSearcher(reader);
 		BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();
@@ -165,5 +168,14 @@ public class BlogIndex {
 			blogList.add(blog);
 		}
 		return blogList;
+	}
+
+	public static void main(String[] args) throws Exception {
+		IndexWriter writer = new BlogIndex().getWriter();
+		writer.close();
+		System.out.println(Paths.get(Constants.constant_LUCENE));
+		Directory directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
+		IndexReader reader = DirectoryReader.open(directory);
+		System.out.println(reader);
 	}
 }

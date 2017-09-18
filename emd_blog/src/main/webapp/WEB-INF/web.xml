@@ -6,6 +6,19 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	id="WebApp_ID" version="2.5">
+	<!-- 错误页面指向,优先是java代码中进行的设置 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/static/error/404.jsp</location>
+	</error-page>
+
+	<error-page>
+
+		<error-code>500</error-code>
+
+		<location>/static/error/500.jsp</location>
+
+	</error-page>
 	<!-- 默认进入首页。index.html -->
 	<display-name>aa</display-name>
 	<welcome-file-list>
@@ -48,15 +61,9 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<!-- 自己编写的filter，进行解决post和get请求乱码 -->
-<!-- 	  <filter>
-		<filter-name>EncodingFilter</filter-name>
-		<filter-class>com.david.emdblog.common.EncodingFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>EncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	 -->
+	<!-- <filter> <filter-name>EncodingFilter</filter-name> <filter-class>com.david.emdblog.common.EncodingFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>EncodingFilter</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
 	<!-- Spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

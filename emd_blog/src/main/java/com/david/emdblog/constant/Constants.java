@@ -15,4 +15,6 @@ public class Constants {
 	public static final int PAGE_SIZE = 10;
 	//博客主页标题
 	public static final String BLOG_TITLE = "欢迎光临程序员小冰技术博客";
+	/*Lucene的路径*/
+	public static String constant_LUCENE = "D:\\lucene";
 }
