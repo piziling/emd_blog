@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.lucene.analysis.TokenStream;
@@ -36,6 +38,8 @@ import org.apache.lucene.store.FSDirectory;
 
 import com.david.emdblog.constant.Constants;
 import com.david.emdblog.entity.Blog;
+import com.david.emdblog.service.BlogService;
+import com.david.emdblog.service.impl.BloggerServiceImpl;
 import com.david.emdblog.utils.DateUtil;
 import com.david.emdblog.utils.UtilFuns;
 
@@ -171,11 +175,19 @@ public class BlogIndex {
 	}
 
 	public static void main(String[] args) throws Exception {
-		IndexWriter writer = new BlogIndex().getWriter();
-		writer.close();
-		System.out.println(Paths.get(Constants.constant_LUCENE));
-		Directory directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
-		IndexReader reader = DirectoryReader.open(directory);
-		System.out.println(reader);
+//		IndexWriter writer = new BlogIndex().getWriter();
+//		writer.close();
+//		System.out.println(Paths.get(Constants.constant_LUCENE));
+//		Directory directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
+//		IndexReader reader = DirectoryReader.open(directory);
+//		System.out.println(reader);
+		BlogService blogService = (BlogService) new BloggerServiceImpl();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start",0);// 开始第几页，
+		map.put("size",50);// 每页展示数量
+		List<Blog> lists = blogService.list(map);
+		for (Blog blog : lists) {
+			new BlogIndex().addIndex(blog);
+		}
 	}
 }

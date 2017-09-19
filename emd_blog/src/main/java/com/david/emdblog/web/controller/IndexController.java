@@ -20,7 +20,9 @@ import com.david.emdblog.constant.ApiUrl;
 import com.david.emdblog.constant.Constants;
 import com.david.emdblog.entity.Blog;
 import com.david.emdblog.entity.PageBean;
+import com.david.emdblog.lucene.BlogIndex;
 import com.david.emdblog.service.BlogService;
+import com.david.emdblog.service.impl.BloggerServiceImpl;
 import com.david.emdblog.utils.CharsetUtils;
 import com.david.emdblog.utils.PageUtils;
 import com.david.emdblog.utils.UtilFuns;
@@ -47,7 +49,7 @@ public class IndexController {
 			@RequestParam(value = "rows", required = false) String rows,
 			@RequestParam(value = "typeId", required = false) String typeId,
 			@RequestParam(value = "releaseDateStr", required = false) String releaseDateStr,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		if (UtilFuns.isEmpty(page) || UtilFuns.isEmpty(page.trim())) {
 			page = "1";
@@ -87,6 +89,12 @@ public class IndexController {
 		}
 
 		modelAndView.addObject("blogList", blogList);
+		for (Blog blog : blogList) {
+			List<String> imagesList = blog.getImagesList();
+			for (String string : imagesList) {
+				System.out.println(string);
+			}
+		}
 		/**
 		 * 将我们查询的参数继续追加进去
 		 */
@@ -107,9 +115,10 @@ public class IndexController {
 
 	/**
 	 * 源码下载
+	 * @throws Exception 
 	 */
 	@RequestMapping("/download")
-	public ModelAndView download() {
+	public ModelAndView download() throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("mainPage", ApiUrl.FOREGROUND_SYSTEM_DOWNLOAD);
 		modelAndView.addObject("pageTitle", "源码下载:" + Constants.BLOG_TITLE);

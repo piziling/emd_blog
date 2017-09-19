@@ -20,7 +20,6 @@ import com.david.emdblog.entity.Comment;
 import com.david.emdblog.entity.PageBean;
 import com.david.emdblog.lucene.BlogIndex;
 import com.david.emdblog.service.BlogService;
-import com.david.emdblog.utils.DateJsonValueProcessor;
 import com.david.emdblog.utils.ResponseUtils;
 import com.david.emdblog.utils.UtilFuns;
 
@@ -42,7 +41,8 @@ public class BlogAdminController {
 	private BlogService blogService;
 	// 博客索引
 	private BlogIndex blogIndex = new BlogIndex();
-
+//	http://localhost/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1505793074364
+//	http://localhost:18080/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1505792914168	
 	/**
 	 * 添加或者修改文章信息。
 	 */
