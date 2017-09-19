@@ -55,5 +55,12 @@ public class CommentServiceImpl implements CommentService {
 	public void update(Comment comment) {
 		commentDao.update(comment);
 	}
+	/**
+	 * 添加评论
+	 */
+	@Override
+	public int add(Comment comment) {
+		return commentDao.add(comment);
+	}
 
 }

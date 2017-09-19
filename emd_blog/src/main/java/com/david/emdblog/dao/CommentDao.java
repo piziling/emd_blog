@@ -32,5 +32,9 @@ public interface CommentDao {
 	 * 更新评论信息
 	 */
 	public void update(Comment comment);
+	/**
+	 * 添加评论
+	 */
+	public int add(Comment comment);
 
 }
