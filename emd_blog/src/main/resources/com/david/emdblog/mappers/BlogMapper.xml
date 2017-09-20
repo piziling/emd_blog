@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="add" useGeneratedKeys="true" keyProperty="id"
 		parameterType="Blog">
 		insert into t_blog
-		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord})
+		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord}),#{contentNoTag}
 	</insert>
 	<!-- 更新博客 更新文章 -->
 	<update id="update" parameterType="Blog">
@@ -93,6 +93,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="keyWord!=null and keyWord!=''">
 				keyWord=#{keyWord},
+			</if>
+			<if test="contentNoTag!=null and contentNoTag!=''">
+				contentNoTag=#{contentNoTag},
 			</if>
 		</set>
 		where id=#{id}

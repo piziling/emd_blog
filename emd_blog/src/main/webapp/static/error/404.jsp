@@ -7,7 +7,7 @@
 <html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>程序员小冰---</title>
+<title>程序员小冰---not found error</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/error/css/style.css">
 <script src="${pageContext.request.contextPath}/static/error/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/static/error/js/public.js"></script>

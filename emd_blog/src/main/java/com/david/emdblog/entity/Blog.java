@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 博客实体类  文章实体类
+ * 博客实体类 文章实体类
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -22,7 +22,7 @@ public class Blog implements Serializable {
 	private String content;// 博客内容
 	private String contentNoTag;// 博客内容，无网页标签 Lucene分词用
 	private BlogType blogType;// 博客类型
-	private String summary;//摘要
+	private String summary;// 摘要
 
 	private Integer blogCount;// 博客数量 非博客实际属性，主要是根据发布日期归档查询博客数量用
 	private String releaseDateStr;// 发布日期字符串 只去年和月
@@ -135,6 +135,22 @@ public class Blog implements Serializable {
 		this.imagesList = imagesList;
 	}
 
+	public Blog(Integer id, String title, String content, String summary) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.summary = summary;
+	}
 
+	public Blog() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", title=" + title + ", releaseDate=" + releaseDate + ", clickHit=" + clickHit
+				+ ", content=" + content + ", contentNoTag=" + contentNoTag + ", summary=" + summary + "]";
+	}
 
 }

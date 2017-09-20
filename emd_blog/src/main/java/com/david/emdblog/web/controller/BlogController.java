@@ -110,6 +110,10 @@ public class BlogController {
 		modelAndView.addObject("mainPage", "foreground/blog/result.jsp");
 		List<Blog> blogList = blogIndex.searchBlog(q.trim());
 		System.out.println("blogList.size"+blogList.size());
+		for (int i = 0; i < blogList.size(); i++) {
+			System.out.println(blogList.get(i).getSummary());
+			System.out.println(blogList.get(i));
+		}
 		// 如果大于10，则显示10个，否则显示全部
 		Integer toIndex = blogList.size() >= Integer.parseInt(page) * 10 ? Integer.parseInt(page) * 10
 				: blogList.size();

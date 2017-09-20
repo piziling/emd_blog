@@ -3,12 +3,20 @@ package com.david.emdblog.lucene;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -98,17 +106,20 @@ public class BlogIndex {
 		}
 	}
 
-	private Directory directory = null;
+	private static Directory directory = null;
+	public static IndexWriter indexWriter = null;
 
 	/**
 	 * 获取IndexWriter实例
 	 */
 
-	private IndexWriter getWriter() throws Exception {
-		directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
-		SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
-		IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
-		IndexWriter indexWriter = new IndexWriter(directory, indexWriterConfig);
+	public static IndexWriter getWriter() throws Exception {
+		if (indexWriter == null) {
+			directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
+			SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+			IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
+			indexWriter = new IndexWriter(directory, indexWriterConfig);
+		}
 		return indexWriter;
 	}
 
@@ -123,6 +134,7 @@ public class BlogIndex {
 	public List<Blog> searchBlog(String q) throws Exception {
 		IndexWriter writer = getWriter();
 		directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
+
 		IndexReader reader = DirectoryReader.open(directory);
 		IndexSearcher is = new IndexSearcher(reader);
 		BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();
@@ -175,19 +187,79 @@ public class BlogIndex {
 	}
 
 	public static void main(String[] args) throws Exception {
-//		IndexWriter writer = new BlogIndex().getWriter();
-//		writer.close();
-//		System.out.println(Paths.get(Constants.constant_LUCENE));
-//		Directory directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
-//		IndexReader reader = DirectoryReader.open(directory);
-//		System.out.println(reader);
-		BlogService blogService = (BlogService) new BloggerServiceImpl();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start",0);// 开始第几页，
-		map.put("size",50);// 每页展示数量
-		List<Blog> lists = blogService.list(map);
-		for (Blog blog : lists) {
-			new BlogIndex().addIndex(blog);
+		BlogIndex blogIndex = new BlogIndex();
+		java.sql.Connection connection = blogIndex.getConnection();
+		List<Blog> blogList = blogIndex.findAllBlog(connection);
+		System.out.println(blogList.size());
+		for (Blog blog : blogList) {
+			blogIndex.addIndex(blog);
 		}
 	}
+
+	/**
+	 * 查询所有文章
+	 */
+	public List<Blog> findAllBlog(Connection connection) throws Exception {
+		List<Blog> lists = new ArrayList<Blog>();
+		if (connection != null) {
+			// 不等于空，则说明连接成功 Statement是用来向数据库发送要执行的SQL语句的！
+			/*
+			 * 二、对数据库做增、删、改 1. 通过Connection对象创建Statement >
+			 * Statement语句的发送器，它的功能就是向数据库发送sql语句！ 2. 调用它的int
+			 * executeUpdate(String sql)，它可以发送DML、DDL
+			 */
+			Statement createStatement = connection.createStatement();
+			/**
+			 * 发送查询的sql语句
+			 */
+			String sqlSelctString = "select * from t_blog";
+			// 得到查询结果，然后将查询结果的内容读取出来
+			ResultSet executeQuery = createStatement.executeQuery(sqlSelctString);
+			while (executeQuery.next()) {
+				Blog blog = new Blog();
+				blog.setId(executeQuery.getInt("id"));
+				blog.setTitle(executeQuery.getString("title"));
+				blog.setReleaseDate(executeQuery.getDate("releaseDate"));
+				blog.setContentNoTag(executeQuery.getString("content"));
+				lists.add(blog);
+			}
+
+			executeQuery.close();
+			createStatement.close();
+			connection.close();
+		}
+
+		return lists;
+
+	}
+
+	/**
+	 * 加载驱动并进行获取连接 /** ClassNotFoundException找不到类 可能没导入驱动包
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 *             检查是否开启了mysql服务器以及用户名密码是否正确
+	 */
+	private java.sql.Connection getConnection() throws ClassNotFoundException, SQLException {
+		/*
+		 * jdbc四大配置参数： > driverClassName：com.mysql.j dbc.Driver >
+		 * url：jdbc:mysql://localhost:3306/db3 > username：root > password：123
+		 */
+		/*
+		 * 所有的java.sql.Driver实现类，都提供了static块，块内的代码就是把自己注册到 DriverManager中！
+		 */
+		/*
+		 * jdbc4.0之后，每个驱动jar包中，在META-INF/services目录下提供了一个名为java.sql.Driver的文件。
+		 * 文件的内容就是该接口的实现类名称！
+		 */
+		Class.forName("com.mysql.jdbc.Driver");
+		// com.mysql.jdbc.Driver driver = new com.mysql.jdbc.Driver();
+		// DriverManager.registerDriver(driver);
+		// 使用url、username、password，得到连接对象
+		java.sql.Connection connection = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/db_blog3?useUnicode=true&amp;characterEncoding=UTF-8", "root", "1234");
+		System.out.println(connection);
+		return connection;
+	}
+
 }
