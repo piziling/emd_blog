@@ -44,10 +44,34 @@ public class BlogAdminController {
 //	http://localhost/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1505793074364
 //	http://localhost:18080/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1505792914168	
 	/**
-	 * 添加或者修改文章信息。
+	 * UE添加或者修改文章信息。
 	 */
 	@RequestMapping("/save")
 	public String save(Blog blog, HttpServletResponse response) throws Exception {
+		int resultTotal = 0;// 操作的记录条数
+		if (blog.getId() == null) {
+			// 则说明是新增
+			resultTotal = blogService.add(blog);
+			blogIndex.addIndex(blog);//添加博客索引
+		} else {
+			// 则说明是更新博客 更新文章
+			resultTotal = blogService.update(blog);
+			blogIndex.updateIndex(blog);// 更新文章索引
+		}
+		JSONObject jsonObject = new JSONObject();
+		if (resultTotal > 0) {
+			jsonObject.put(JsonConstant.SUCCESS, JsonConstant.TRUE);
+		} else {
+			jsonObject.put(JsonConstant.SUCCESS, JsonConstant.FALSE);
+		}
+		ResponseUtils.write(response, jsonObject);
+		return null;
+	}
+	/**
+	 * Markdown语法添加或者修改文章信息。
+	 */
+	@RequestMapping("/saveMarkdownBlog")
+	public String saveMarkdownBlog(Blog blog, HttpServletResponse response) throws Exception {
 		int resultTotal = 0;// 操作的记录条数
 		if (blog.getId() == null) {
 			// 则说明是新增
