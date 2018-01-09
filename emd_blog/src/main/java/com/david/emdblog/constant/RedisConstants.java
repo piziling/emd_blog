@@ -12,4 +12,7 @@ public class RedisConstants {
 	
 	// 首页前十条数据
 	public static final String CONTENT_INDEX = "CONTENT_INDEX";
+	
+	// 关于站长数据
+	public static final String ABOUT_ME_INDEX = "ABOUT_ME_INDEX";
 }

@@ -16,6 +16,7 @@ import com.david.emdblog.entity.Blog;
 import com.david.emdblog.jedis.JedisClient;
 import com.david.emdblog.service.BlogService;
 import com.david.emdblog.utils.JsonUtils;
+import com.david.emdblog.utils.LogUtils;
 
 /**
  * 博客，文章，日志的业务层
@@ -40,26 +41,39 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public List<Blog> list(Map<String, Object> map) {
+		Integer page = (Integer) map.get("start");
+		String typeId = (String) map.get("typeId");
+		String releaseDateStr = (String) map.get("releaseDateStr");
+//		if (StringUtils.isEmpty(typeId)) {
+//			LogUtils.e("weikognletypeid");
+//		}
+//		if (StringUtils.isEmpty(releaseDateStr)) {
+//			LogUtils.e("weikognlereleaseDateStr");
+//		}
 		// 先查询redis缓存
-		try {
-			String json = jedisClient.get(RedisConstants.CONTENT_INDEX);
-			if (StringUtils.isNotBlank(json)) {
-				System.out.println("查询到了redis缓存");
-				// 不等于空，直接返回数据
-				List<Blog> list = JsonUtils.jsonToList(json, Blog.class);
-				return list;
+		if ((page==1||page==0)&&StringUtils.isBlank(typeId)&&StringUtils.isBlank(releaseDateStr)) {
+			try {
+				String json = jedisClient.hget(RedisConstants.CONTENT_INDEX,RedisConstants.CONTENT_INDEX);
+				if (StringUtils.isNotBlank(json)) {
+					System.out.println("查询到了redis缓存");
+					// 不等于空，直接返回数据
+					List<Blog> list = JsonUtils.jsonToList(json, Blog.class);
+					return list;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		// redis中没有存在，则查询数据库。
 		List<Blog> list = blogDao.list(map);
-		System.out.println("查询到了数据库");
-		// 将查询结果存放到redis中.如果添加失败，也要返回，所以不能影响正常逻辑
-		try {
-			jedisClient.set(RedisConstants.CONTENT_INDEX, JsonUtils.objectToJson(list));
-		} catch (Exception e) {
-			e.printStackTrace();
+//		System.out.println("查询到了数据库");
+		if ((page==1||page==0)&&StringUtils.isBlank(typeId)&&StringUtils.isBlank(releaseDateStr)) {
+			// 将查询结果存放到redis中.如果添加失败，也要返回，所以不能影响正常逻辑
+			try {
+				jedisClient.hset(RedisConstants.CONTENT_INDEX,RedisConstants.CONTENT_INDEX,JsonUtils.objectToJson(list));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
@@ -81,10 +95,11 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	/**
-	 * 新增文章博客
+	 * 新增文章博客。因为更新后需要更新redis
 	 */
 	@Override
 	public int add(Blog blog) {
+		jedisClient.hdel(RedisConstants.CONTENT_INDEX, RedisConstants.CONTENT_INDEX);
 		return blogDao.add(blog);
 	}
 
@@ -93,6 +108,7 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public int update(Blog blog) {
+		jedisClient.hdel(RedisConstants.CONTENT_INDEX, RedisConstants.CONTENT_INDEX);
 		return blogDao.update(blog);
 	}
 
@@ -117,6 +133,7 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public void deleteById(Integer id) {
+		jedisClient.hdel(RedisConstants.CONTENT_INDEX, RedisConstants.CONTENT_INDEX);
 		blogDao.deleteById(id);
 	}
 

@@ -59,22 +59,24 @@ public class IndexController {
 			rows = Constants.PAGE_SIZE + "";
 		}
 		PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
-		System.out.println(
-				"pageBean.getStart()" + pageBean.getStart() + "pageBean.getPageSize()" + pageBean.getPageSize());
+//		System.out.println(
+//				"pageBean.getStart()" + pageBean.getStart() + "pageBean.getPageSize()" + pageBean.getPageSize());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", pageBean.getStart());// 开始第几页，
 		map.put("size", pageBean.getPageSize());// 每页展示数量
 		map.put("typeId", typeId);// 日志分类ID
 		if (UtilFuns.isEmpty(releaseDateStr)) {
+//			System.out.println("releaseDateStr:weikong");
 			map.put("releaseDateStr", releaseDateStr);
 		} else {
+			map.put("releaseDateStrbuweikong:", releaseDateStr);
 			map.put("releaseDateStr", CharsetUtils.getGetMethodParameter(releaseDateStr));// 按日期查询
 		}
 
 		// System.out.println(CharsetUtils.getGetMethodParameter(releaseDateStr));
 		// 获取日志列表。里面有设置redis缓存
 		List<Blog> blogList = blogService.list(map);
-		System.out.println(blogList.size());
+//		System.out.println(blogList.size());
 		for (Blog blog : blogList) {
 			List<String> imagesList = blog.getImagesList();
 			String blogInfo = blog.getContent();
