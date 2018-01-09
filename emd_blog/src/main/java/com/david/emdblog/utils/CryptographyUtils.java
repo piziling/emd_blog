@@ -19,7 +19,8 @@ public class CryptographyUtils {
 	}
 	
 	public static void main(String[] args) {
-		String password="123456";
+//		String password="123456";
+		String password="admin";
 		//928bfd2577490322a6e19b793691467e
 //		System.out.println("Md5加密："+CryptographyUtils.md5(password, "自己的用户名"));
 		System.out.println("Md5加密："+CryptographyUtils.md5(password, "admin"));

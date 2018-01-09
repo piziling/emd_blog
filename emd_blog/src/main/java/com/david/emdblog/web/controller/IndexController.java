@@ -51,6 +51,7 @@ public class IndexController {
 			@RequestParam(value = "releaseDateStr", required = false) String releaseDateStr,
 			HttpServletRequest request) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
+		// 分页的数据
 		if (UtilFuns.isEmpty(page) || UtilFuns.isEmpty(page.trim())) {
 			page = "1";
 		}
@@ -63,7 +64,7 @@ public class IndexController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", pageBean.getStart());// 开始第几页，
 		map.put("size", pageBean.getPageSize());// 每页展示数量
-		map.put("typeId", typeId);// 分类ID
+		map.put("typeId", typeId);// 日志分类ID
 		if (UtilFuns.isEmpty(releaseDateStr)) {
 			map.put("releaseDateStr", releaseDateStr);
 		} else {
@@ -71,6 +72,7 @@ public class IndexController {
 		}
 
 		// System.out.println(CharsetUtils.getGetMethodParameter(releaseDateStr));
+		// 获取日志列表。里面有设置redis缓存
 		List<Blog> blogList = blogService.list(map);
 		System.out.println(blogList.size());
 		for (Blog blog : blogList) {

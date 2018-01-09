@@ -5,11 +5,17 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.david.emdblog.constant.RedisConstants;
 import com.david.emdblog.dao.BlogDao;
 import com.david.emdblog.entity.Blog;
+import com.david.emdblog.jedis.JedisClient;
 import com.david.emdblog.service.BlogService;
+import com.david.emdblog.utils.JsonUtils;
 
 /**
  * 博客，文章，日志的业务层
@@ -24,13 +30,38 @@ public class BlogServiceImpl implements BlogService {
 
 	@Resource
 	private BlogDao blogDao;
+	
+	@Autowired
+	private JedisClient jedisClient;
 
 	/**
-	 * 查看博客内容列表
+	 * 查看博客内容列表。首先查询redis缓存中是否存在，如果存在，则直接读取，否则查询数据库.
+	 * 注意：添加内容时，要更新redis数据，不然前台将看不到。
 	 */
 	@Override
 	public List<Blog> list(Map<String, Object> map) {
-		return blogDao.list(map);
+		// 先查询redis缓存
+		try {
+			String json = jedisClient.get(RedisConstants.CONTENT_INDEX);
+			if (StringUtils.isNotBlank(json)) {
+				System.out.println("查询到了redis缓存");
+				// 不等于空，直接返回数据
+				List<Blog> list = JsonUtils.jsonToList(json, Blog.class);
+				return list;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// redis中没有存在，则查询数据库。
+		List<Blog> list = blogDao.list(map);
+		System.out.println("查询到了数据库");
+		// 将查询结果存放到redis中.如果添加失败，也要返回，所以不能影响正常逻辑
+		try {
+			jedisClient.set(RedisConstants.CONTENT_INDEX, JsonUtils.objectToJson(list));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	/**

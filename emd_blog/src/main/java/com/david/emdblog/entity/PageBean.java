@@ -6,8 +6,8 @@ package com.david.emdblog.entity;
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
  */
-public class PageBean {
 
+public class PageBean {
 	private int page; // 第几页
 	private int pageSize; // 每页记录数
 	private int start; // 起始页
