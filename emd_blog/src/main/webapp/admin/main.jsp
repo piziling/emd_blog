@@ -92,6 +92,22 @@
 		});
 	}
 
+	function oneImportLucene() {
+		$.messager.confirm("系统提示", "您确定要重置Lucene索引库吗？", function(r) {
+			if (r) {
+				$.post("${pageContext.request.contextPath}/admin/system/oneImportLucene.do", {}, function(result) {
+					if (result.success) {
+						$.messager.alert("系统提示", "已成功重置Lucene索引库");
+					} else {
+						$.messager.alert("系统提示", "重置Lucene索引库失败");
+					}
+				}, "json");
+			}
+		});
+		
+	
+	}
+
 	function refreshSystem() {
 		$.post("${pageContext.request.contextPath}/admin/system/refreshSystem.do", {}, function(result) {
 			if (result.success) {
@@ -181,10 +197,19 @@
 				<a href="javascript:openPasswordModifyDialog()"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-modifyPassword'"
-					style="width: 150px;">修改密码</a> <a href="javascript:refreshSystem()"
+					style="width: 150px;">修改密码</a> 
+					
+					<a href="javascript:refreshSystem()"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-refresh'"
-					style="width: 150px;">刷新系统缓存</a> <a href="javascript:logout()"
+					style="width: 150px;">刷新系统缓存</a> 
+					
+					<a href="javascript:oneImportLucene()"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-refresh'" style="width: 150px;">重置Lucene索引库</a>
+					
+					
+					<a href="javascript:logout()"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
 			</div>

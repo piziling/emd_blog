@@ -79,6 +79,13 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	/**
+	 * 这个不要参数，查询所有文章，方便构建索引库
+	 */
+	@Override
+	public List<Blog> listIndex(Map<String, Object> map) {
+		return blogDao.list(map);
+	}
+	/**
 	 * 查询博客的总数量
 	 */
 	@Override

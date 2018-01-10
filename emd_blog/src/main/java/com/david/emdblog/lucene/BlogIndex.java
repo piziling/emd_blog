@@ -94,6 +94,7 @@ public class BlogIndex {
 	 */
 	public void addIndex(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
+//		System.out.println(blog);
 		Document document = new Document();
 		document.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
 		document.add(new TextField("title", blog.getTitle(), Field.Store.YES));
@@ -102,7 +103,47 @@ public class BlogIndex {
 		writer.addDocument(document);
 		if (writer != null) {
 			writer.close();
-
+			indexWriter.close();
+			indexWriter = null;
+			writer = null;
+		}
+	}
+	
+	/**
+	 * 添加博客索引
+	 */
+	public void addIndexNotClosed(Blog blog) throws Exception {
+		IndexWriter writer = getWriter();
+//		System.out.println(blog);
+		Document document = new Document();
+		document.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
+		document.add(new TextField("title", blog.getTitle(), Field.Store.YES));
+		document.add(new StringField("releaseDate", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
+		document.add(new TextField("content", blog.getContentNoTag(), Field.Store.YES));
+		writer.addDocument(document);
+		if (writer != null) {
+			writer.close();
+			indexWriter.close();
+			indexWriter = null;
+			writer = null;
+		}
+//		System.out.println("添加索引成功");
+	}
+	
+	
+	/**
+	 * 删除全部索引
+	 */
+	public void delAllIndex() throws Exception {
+		// 指定索引和文档存储的目录
+		IndexWriter writer = getWriter();
+		// 删除所有
+		writer.deleteAll();
+		// 提交
+		writer.commit();
+		// 关闭
+		if (writer != null) {
+			writer.close();
 		}
 	}
 

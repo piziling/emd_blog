@@ -13,6 +13,8 @@ import com.david.emdblog.entity.Blog;
 public interface BlogService {
 
 	public List<Blog> list(Map<String, Object> map);
+	
+	public List<Blog> listIndex(Map<String, Object> map);
 
 	public long getTotal(Map<String, Object> map);
 

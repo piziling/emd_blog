@@ -1,6 +1,8 @@
 package com.david.emdblog.web.controller.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -15,6 +17,7 @@ import com.david.emdblog.entity.Blog;
 import com.david.emdblog.entity.BlogType;
 import com.david.emdblog.entity.Blogger;
 import com.david.emdblog.entity.Link;
+import com.david.emdblog.lucene.BlogIndex;
 import com.david.emdblog.service.BlogService;
 import com.david.emdblog.service.BlogTypeService;
 import com.david.emdblog.service.BloggerService;
@@ -44,6 +47,8 @@ public class SystemAdminController {
 	
 	@Resource(name="bloggerService")
 	private BloggerService bloggerService;
+	// 博客索引
+	private BlogIndex blogIndex = new BlogIndex();
 	/**
 	 * 刷新系统缓存
 	 */
@@ -67,4 +72,28 @@ public class SystemAdminController {
 		ResponseUtils.write(response, jsonObject);
 		return null;
 	}
+	
+	/**
+	 * 一键构建Lucene索引库
+	 */
+	@RequestMapping("/oneImportLucene")
+	public String oneImportLucene(HttpServletResponse response,HttpServletRequest request) throws Exception {
+//		blogIndex.delAllIndex();
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Blog> blogList = blogService.listIndex(map);
+		System.out.println(blogList.size());
+		for (int i = 0; i < blogList.size(); i++) {
+			System.out.println("iii"+i);
+			blogIndex.addIndexNotClosed(blogList.get(i));
+		}
+//		for (Blog blog : blogList) {
+//			System.out.println();
+//			blogIndex.addIndexNotClosed(blog);
+//		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("success", true);
+		ResponseUtils.write(response, jsonObject);
+		return null;
+	}
+	
 }
