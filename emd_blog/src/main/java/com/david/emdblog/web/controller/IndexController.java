@@ -66,14 +66,12 @@ public class IndexController {
 		map.put("size", pageBean.getPageSize());// 每页展示数量
 		map.put("typeId", typeId);// 日志分类ID
 		if (UtilFuns.isEmpty(releaseDateStr)) {
-//			System.out.println("releaseDateStr:weikong");
 			map.put("releaseDateStr", releaseDateStr);
 		} else {
-			map.put("releaseDateStrbuweikong:", releaseDateStr);
-			map.put("releaseDateStr", CharsetUtils.getGetMethodParameter(releaseDateStr));// 按日期查询
+			System.out.println("releaseDateStrbuweikong:"+releaseDateStr+"date;"+CharsetUtils.getGetMethodParameter(releaseDateStr));
+			map.put("releaseDateStr",releaseDateStr);// 按日期查询
 		}
 
-		// System.out.println(CharsetUtils.getGetMethodParameter(releaseDateStr));
 		// 获取日志列表。里面有设置redis缓存
 		List<Blog> blogList = blogService.list(map);
 //		System.out.println(blogList.size());

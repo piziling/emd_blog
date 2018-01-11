@@ -78,7 +78,7 @@ public class SystemAdminController {
 	 */
 	@RequestMapping("/oneImportLucene")
 	public String oneImportLucene(HttpServletResponse response,HttpServletRequest request) throws Exception {
-//		blogIndex.delAllIndex();
+		blogIndex.delAllIndex();
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Blog> blogList = blogService.listIndex(map);
 		System.out.println(blogList.size());

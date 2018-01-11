@@ -68,6 +68,7 @@ public class BlogIndex {
 		Document document = new Document();
 		document.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
 		document.add(new TextField("title", blog.getTitle(), Field.Store.YES));
+//		document.add(new StringField("releaseDate", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
 		document.add(new StringField("releaseDate", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
 		document.add(new TextField("content", blog.getContentNoTag(), Field.Store.YES));
 		writer.updateDocument(new Term("id", String.valueOf(blog.getId())), document);
@@ -114,7 +115,8 @@ public class BlogIndex {
 	 */
 	public void addIndexNotClosed(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
-//		System.out.println(blog);
+//		System.out.println("data:"+  DateUtil.formatDate(blog.getReleaseDate(), "yyyy-MM-dd"));
+//		System.out.println("data:"+blog.getReleaseDate());
 		Document document = new Document();
 		document.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
 		document.add(new TextField("title", blog.getTitle(), Field.Store.YES));
@@ -144,6 +146,9 @@ public class BlogIndex {
 		// 关闭
 		if (writer != null) {
 			writer.close();
+			indexWriter.close();
+			indexWriter = null;
+			writer = null;
 		}
 	}
 
