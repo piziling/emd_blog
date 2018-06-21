@@ -121,4 +121,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getLastBlog" parameterType="Integer" resultMap="BlogResult">
 		select * from t_blog where id&lt;#{id} order by id desc limit 1
 	</select>
+	
+	
 </mapper>
