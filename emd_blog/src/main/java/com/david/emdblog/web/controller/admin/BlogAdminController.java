@@ -50,6 +50,7 @@ public class BlogAdminController {
 	public String save(Blog blog, HttpServletResponse response) throws Exception {
 		int resultTotal = 0;// 操作的记录条数
 		if (blog.getId() == null) {
+			System.out.print(blog);
 			// 则说明是新增
 			resultTotal = blogService.add(blog);
 			blogIndex.addIndex(blog);//添加博客索引

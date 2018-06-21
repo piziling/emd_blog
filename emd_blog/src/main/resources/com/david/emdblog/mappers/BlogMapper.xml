@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="add" useGeneratedKeys="true" keyProperty="id"
 		parameterType="Blog">
 		insert into t_blog
-		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord}),#{contentNoTag})
+		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord},#{contentNoTag})
 	</insert>
 	<!-- 更新博客 更新文章 -->
 	<update id="update" parameterType="Blog">
