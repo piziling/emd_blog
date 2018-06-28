@@ -303,10 +303,12 @@
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>2.2</version>
 					<!-- 端口 -->
-					<!-- <port>8880</port> -->
+					<configuration>
+					<port>80</port>
 					<!-- 访问路径 -->
-					<!-- <path>/</path> -->
+					<path>/</path>
 					<!-- <contextReloadable>true</contextReloadable> -->
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
