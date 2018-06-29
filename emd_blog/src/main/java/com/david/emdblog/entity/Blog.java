@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 博客实体类 文章实体类
+ * 文章实体类 文章实体类
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -15,20 +15,20 @@ import java.util.List;
 public class Blog implements Serializable {
 
 	private Integer id;// 编号
-	private String title;// 博客标题
+	private String title;// 文章标题
 	private Date releaseDate;// 发布日期
 	private Integer clickHit;// 查看次数
 	private Integer replyHit;// 回复次数
-	private String content;// 博客内容
-	private String contentNoTag;// 博客内容，无网页标签 Lucene分词用
-	private BlogType blogType;// 博客类型
+	private String content;// 文章内容
+	private String contentNoTag;// 文章内容，无网页标签 Lucene分词用
+	private BlogType blogType;// 文章类型
 	private String summary;// 摘要
 
-	private Integer blogCount;// 博客数量 非博客实际属性，主要是根据发布日期归档查询博客数量用
+	private Integer blogCount;// 文章数量 非文章实际属性，主要是根据发布日期归档查询文章数量用
 	private String releaseDateStr;// 发布日期字符串 只去年和月
 	private String keyWord;// 关键字，空格 隔开
 
-	private List<String> imagesList = new ArrayList<String>();// 博客里存在的图片
+	private List<String> imagesList = new ArrayList<String>();// 文章里存在的图片
 																// 主要用于列表展示显示缩略图
 
 	public Integer getId() {

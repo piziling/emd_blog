@@ -126,7 +126,9 @@
 				<td width="50%"><img alt="logo"
 					src="${pageContext.request.contextPath}/static/images/logo.png">
 				</td>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a  href="${pageContext.request.contextPath}/index.html" target="_blank">进入首页</a>
 				<td valign="bottom" align="right" width="50%"><font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${currentUser.userName }</font>
+				</td>
 				</td>
 			</tr>
 		</table>
@@ -153,7 +155,7 @@
 					data-options="plain:true,iconCls:'icon-review'"
 					style="width: 150px">评论审核</a>
 			</div>
-			<div title="博客管理" data-options="iconCls:'icon-bkgl'"
+			<div title="文章管理" data-options="iconCls:'icon-bkgl'"
 				style="padding:10px;">
 				<a href="javascript:openTab('写文章','writeBlog.jsp','icon-writeblog')"
 					class="easyui-linkbutton"
@@ -163,7 +165,7 @@
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">文章信息管理</a>
 			</div>
-			<div title="博客类别管理" data-options="iconCls:'icon-bklb'"
+			<div title="文章类别管理" data-options="iconCls:'icon-bklb'"
 				style="padding:10px">
 				<a
 					href="javascript:openTab('文章类别管理','blogTypeManage.jsp','icon-bklb')"

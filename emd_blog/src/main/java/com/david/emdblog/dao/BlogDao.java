@@ -6,7 +6,7 @@ import java.util.Map;
 import com.david.emdblog.entity.Blog;
 
 /**
- * 博客的持久层
+ * 文章的持久层
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -14,12 +14,12 @@ import com.david.emdblog.entity.Blog;
  */
 public interface BlogDao {
 	/**
-	 * 分页查询博客
+	 * 分页查询文章
 	 */
 	public List<Blog> list(Map<String, Object> map);
 
 	/**
-	 * 获取博客总数量
+	 * 获取文章总数量
 	 */
 	public long getTotal(Map<String, Object> map);
 
@@ -29,12 +29,12 @@ public interface BlogDao {
 	public List<Blog> countList();
 
 	/**
-	 * 新增文章博客
+	 * 新增文章文章
 	 */
 	public int add(Blog blog);
 
 	/**
-	 * 则说明是更新博客 更新文章
+	 * 则说明是更新文章 更新文章
 	 */
 	public int update(Blog blog);
 

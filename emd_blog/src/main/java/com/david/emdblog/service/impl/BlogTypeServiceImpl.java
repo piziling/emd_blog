@@ -12,7 +12,7 @@ import com.david.emdblog.entity.BlogType;
 import com.david.emdblog.service.BlogTypeService;
 
 /**
- * 博客，文章类型
+ * 文章类型
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -25,7 +25,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	private BlogTypeDao blogTypeDao;
 
 	/**
-	 * 查询所有博客类别以及对应的数量
+	 * 查询所有文章类别以及对应的数量
 	 */
 	@Override
 	public List<BlogType> countList() {

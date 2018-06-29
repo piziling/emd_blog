@@ -39,7 +39,7 @@ import net.sf.json.JsonConfig;
 public class BlogAdminController {
 	@Resource(name = "blogService")
 	private BlogService blogService;
-	// 博客索引
+	// 文章索引
 	private BlogIndex blogIndex = new BlogIndex();
 
 	// http://localhost/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1505793074364
@@ -55,12 +55,12 @@ public class BlogAdminController {
 			// 则说明是新增
 			resultTotal = blogService.add(blog);
 			try {
-				blogIndex.addIndex(blog);// 添加博客索引
+				blogIndex.addIndex(blog);// 添加文章索引
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
-			// 则说明是更新博客 更新文章
+			// 则说明是更新文章 更新文章
 			resultTotal = blogService.update(blog);
 			try {
 				blogIndex.updateIndex(blog);// 更新文章索引
@@ -88,9 +88,9 @@ public class BlogAdminController {
 		if (blog.getId() == null) {
 			// 则说明是新增
 			resultTotal = blogService.add(blog);
-			blogIndex.addIndex(blog);// 添加博客索引
+			blogIndex.addIndex(blog);// 添加文章索引
 		} else {
-			// 则说明是更新博客 更新文章
+			// 则说明是更新文章
 			resultTotal = blogService.update(blog);
 			blogIndex.updateIndex(blog);// 更新文章索引
 		}
@@ -105,7 +105,7 @@ public class BlogAdminController {
 	}
 
 	/**
-	 * 分页查询所有的文章博客 文章列表展示时。搜索：s_blog
+	 * 分页查询所有的文章 文章列表展示时。搜索：s_blog
 	 */
 	@RequestMapping("/list")
 	public String list(@RequestParam(value = "page", required = false) String page,
@@ -160,7 +160,7 @@ public class BlogAdminController {
 		for (int i = 0; i < idsStr.length; i++) {
 			blogService.deleteById(Integer.parseInt(idsStr[i]));
 			try {
-				blogIndex.deleteIndex(idsStr[i]);// 删除对应的博客的索引
+				blogIndex.deleteIndex(idsStr[i]);// 删除对应的文章的索引
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

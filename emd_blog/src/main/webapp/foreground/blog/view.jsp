@@ -38,7 +38,7 @@
 <div class="data_list">
 	<div class="data_list_title">
 		<img src="${pageContext.request.contextPath}/static/images/blog_show_icon.png"/>
-		博客信息
+		文章详情
 	</div>
 	<div>
 	   <div class="blog_title"><h3><strong>${blog.title }</strong></h3></div>

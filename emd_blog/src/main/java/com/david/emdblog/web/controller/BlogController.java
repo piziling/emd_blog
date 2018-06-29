@@ -23,7 +23,7 @@ import com.david.emdblog.service.CommentService;
 import com.david.emdblog.utils.UtilFuns;
 
 /**
- * 博客文章的controller。主要是前端
+ * 文章的controller。主要是前端
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -38,7 +38,7 @@ public class BlogController {
 
 	@Resource(name = "commentService")
 	private CommentService commentService;
-	// 博客索引
+	// 文章索引
 	private BlogIndex blogIndex = new BlogIndex();
 
 	/**
@@ -60,7 +60,7 @@ public class BlogController {
 			modelAndView.addObject("keyWords", null);
 		}
 		modelAndView.addObject("blog", blog);
-		// 博客点击次数加1
+		// 文章点击次数加1
 		blog.setClickHit(blog.getClickHit() + 1);
 		blogService.update(blog);
 		Map<String, Object> map = new HashMap();

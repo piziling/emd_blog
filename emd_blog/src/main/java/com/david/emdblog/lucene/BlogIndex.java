@@ -52,7 +52,7 @@ import com.david.emdblog.utils.DateUtil;
 import com.david.emdblog.utils.UtilFuns;
 
 /**
- * 博客索引类
+ * 文章索引类
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -61,7 +61,7 @@ import com.david.emdblog.utils.UtilFuns;
 public class BlogIndex {
 
 	/**
-	 * 更新文章博客索引
+	 * 更新文章文章索引
 	 */
 	public void updateIndex(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
@@ -78,7 +78,7 @@ public class BlogIndex {
 	}
 
 	/**
-	 * 删除指定文章博客的索引
+	 * 删除指定文章文章的索引
 	 */
 	public void deleteIndex(String blogId) throws Exception {
 		IndexWriter indexWriter = getWriter();
@@ -91,7 +91,7 @@ public class BlogIndex {
 	}
 
 	/**
-	 * 添加博客索引
+	 * 添加文章索引
 	 */
 	public void addIndex(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
@@ -111,7 +111,7 @@ public class BlogIndex {
 	}
 	
 	/**
-	 * 添加博客索引
+	 * 添加文章索引
 	 */
 	public void addIndexNotClosed(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
@@ -170,7 +170,7 @@ public class BlogIndex {
 	}
 
 	/**
-	 * 查询博客信息
+	 * 查询文章信息
 	 * 
 	 * @param q
 	 *            查询关键字

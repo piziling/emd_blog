@@ -12,7 +12,7 @@ public class Comment {
 	private Integer id;//编号
 	private String userIp;//用户评论者的ip
 	private String content;//评论内容
-	private Blog blog;//被评论的博客。文章
+	private Blog blog;//被评论的文章。文章
 	private Date commentDate;//评论日期
 	private Integer state;//审核状态，0待审核。1审核通过，2审核未通过
 	public Integer getId() {

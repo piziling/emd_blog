@@ -306,7 +306,7 @@
 					<configuration>
 					<port>80</port>
 					<!-- 访问路径 -->
-					<path>/</path>
+					<!-- <path>/</path> -->
 					<!-- <contextReloadable>true</contextReloadable> -->
 					</configuration>
 				</plugin>

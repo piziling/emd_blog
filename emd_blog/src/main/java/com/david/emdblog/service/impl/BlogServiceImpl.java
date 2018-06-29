@@ -19,7 +19,7 @@ import com.david.emdblog.utils.JsonUtils;
 import com.david.emdblog.utils.LogUtils;
 
 /**
- * 博客，文章，日志的业务层
+ * 文章，日志的业务层
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -36,7 +36,7 @@ public class BlogServiceImpl implements BlogService {
 	private JedisClient jedisClient;
 
 	/**
-	 * 查看博客内容列表。首先查询redis缓存中是否存在，如果存在，则直接读取，否则查询数据库.
+	 * 查看文章内容列表。首先查询redis缓存中是否存在，如果存在，则直接读取，否则查询数据库.
 	 * 注意：添加内容时，要更新redis数据，不然前台将看不到。
 	 */
 	@Override
@@ -86,7 +86,7 @@ public class BlogServiceImpl implements BlogService {
 		return blogDao.list(map);
 	}
 	/**
-	 * 查询博客的总数量
+	 * 查询文章的总数量
 	 */
 	@Override
 	public long getTotal(Map<String, Object> map) {
@@ -94,7 +94,7 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	/**
-	 * 根据日期分组查询博客,所有文章以及对应的数量
+	 * 根据日期分组查询文章,所有文章以及对应的数量
 	 */
 	@Override
 	public List<Blog> countList() {
@@ -102,7 +102,7 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	/**
-	 * 新增文章博客。因为更新后需要更新redis
+	 * 新增文章。因为更新后需要更新redis
 	 */
 	@Override
 	public int add(Blog blog) {
@@ -111,7 +111,7 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	/**
-	 * 说明是更新博客 更新文章
+	 * 说明是更新文章 
 	 */
 	@Override
 	public int update(Blog blog) {
