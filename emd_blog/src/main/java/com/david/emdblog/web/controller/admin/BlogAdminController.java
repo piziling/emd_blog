@@ -45,11 +45,12 @@ public class BlogAdminController {
 	// http://localhost/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1505793074364
 	// http://localhost:18080/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1505792914168
 	/**
-	 * UE添加或者修改文章信息。
+	 * UE添加或者修改文章信息。由于是ue管理，所以blogFormat为ue
 	 */
 	@RequestMapping("/save")
 	public String save(Blog blog, HttpServletResponse response) throws Exception {
 		int resultTotal = 0;// 操作的记录条数
+		blog.setBlogFormat("ue");
 		if (blog.getId() == null) {
 			System.out.print(blog);
 			// 则说明是新增
@@ -80,11 +81,12 @@ public class BlogAdminController {
 	}
 
 	/**
-	 * Markdown语法添加或者修改文章信息。
+	 * Markdown语法添加或者修改文章信息。由于是Markdown管理，所以blogFormat为md
 	 */
 	@RequestMapping("/saveMarkdownBlog")
 	public String saveMarkdownBlog(Blog blog, HttpServletResponse response) throws Exception {
 		int resultTotal = 0;// 操作的记录条数
+		blog.setBlogFormat("md");
 		if (blog.getId() == null) {
 			// 则说明是新增
 			resultTotal = blogService.add(blog);
@@ -125,6 +127,7 @@ public class BlogAdminController {
 		map.put("start", pageBean.getStart());// 起始页
 		map.put("size", pageBean.getPageSize());
 		map.put("title", UtilFuns.formatLike(s_blog.getTitle()));
+		map.put("blogFormat", s_blog.getBlogFormat());
 		List<Blog> blogList = blogService.list(map);// 获取文章的列表
 		Long total = blogService.getTotal(map);// 获取文章的总数量
 		JSONObject jsonObject = new JSONObject();

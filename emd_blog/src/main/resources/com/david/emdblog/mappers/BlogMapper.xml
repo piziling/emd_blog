@@ -15,11 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="summary" column="summary" />
 		<result property="releaseDateStr" column="releaseDateStr" />
 		<result property="keyWord" column="keyWord" />
+		<result property="blogFormat" column="blogFormat" />
 		<association property="blogType" column="typeId"
 			select="com.david.emdblog.dao.BlogTypeDao.findById"></association>
 	</resultMap>
 
-	<!-- 根据标题，类型，日期分页查询。排序得到博客列表 -->
+	<!-- 根据标题，类型，日期分页查询。排序得到文章列表 -->
 	<select id="list" parameterType="Map" resultMap="BlogResult">
 		select * from t_blog
 		<where>
@@ -32,6 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="releaseDateStr!=null and releaseDateStr!=''">
 				and DATE_FORMAT(releaseDate,'%Y年%m月')=#{releaseDateStr}
 			</if>
+			<if test="blogFormat!=null and blogFormat!=''">
+					and blogFormat = #{blogFormat}
+			</if>
 		</where>
 		<!-- 排序以及分页放在where之后 -->
 		order by releaseDate desc
@@ -39,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			limit #{start},#{size}
 		</if>
 	</select>
-	<!-- 获得博客的总数量 -->
+	<!-- 获得文章的总数量 -->
 	<select id="getTotal" parameterType="Map" resultType="Long">
 		select count(*) from t_blog
 		<where>
@@ -55,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<!-- 根据日期分组查询博客,所有文章以及对应的数量 -->
+	<!-- 根据日期分组查询文章,所有文章以及对应的数量 -->
 	<select id="countList" resultMap="BlogResult">
 		SELECT
 		DATE_FORMAT(releaseDate,'%Y年%m月') AS releaseDateStr ,COUNT(*) AS
@@ -63,13 +67,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC;
 	</select>
 
-	<!-- 新增文章博客 .now()当前时间。 -->
+	<!-- 新增文章.now()当前时间。 -->
 	<insert id="add" useGeneratedKeys="true" keyProperty="id"
 		parameterType="Blog">
 		insert into t_blog
-		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord},#{contentNoTag})
+		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord},#{contentNoTag},#{blogFormat})
 	</insert>
-	<!-- 更新博客 更新文章 -->
+	<!--  更新文章 -->
 	<update id="update" parameterType="Blog">
 		update t_blog
 		<set>
@@ -96,6 +100,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="contentNoTag!=null and contentNoTag!=''">
 				contentNoTag=#{contentNoTag},
+			</if>
+			<if test="blogFormat!=null and blogFormat!=''">
+				blogFormat=#{blogFormat},
 			</if>
 		</set>
 		where id=#{id}

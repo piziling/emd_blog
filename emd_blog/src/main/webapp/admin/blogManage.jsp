@@ -76,6 +76,7 @@
    		<th field="title" width="200" align="center" formatter="formatTitle">标题</th>
    		<th field="releaseDate" width="50" align="center">发布日期</th>
    		<th field="blogType" width="50" align="center" formatter="formatBlogType">文章类别</th>
+   		<th field="blogFormat" width="50" align="center">文章格式</th>
    	</tr>
    </thead>
  </table>

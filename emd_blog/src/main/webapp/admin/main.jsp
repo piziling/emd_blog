@@ -126,10 +126,10 @@
 				<td width="50%"><img alt="logo"
 					src="${pageContext.request.contextPath}/static/images/logo.png">
 				</td>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a  href="${pageContext.request.contextPath}/index.html" target="_blank">进入首页</a>
+			
 				<td valign="bottom" align="right" width="50%"><font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${currentUser.userName }</font>
 				</td>
-				</td>
+				
 			</tr>
 		</table>
 	</div>
@@ -137,8 +137,12 @@
 		<div class="easyui-tabs" fit="true" border="false" id="tabs">
 			<div title="首页" data-options="iconCls:'icon-home'">
 				<div align="center" style="padding-top: 100px">
-					<font color="red" size="10">欢迎使用程序员小冰后台博客管理系统</font>
+					<font color="red" size="5">欢迎使用程序员小冰后台博客管理系统</font>
 				</div>
+				<div align="center" style="padding-top: 100px">
+					<font color="red" size="5"><a  href="${pageContext.request.contextPath}/index.html" target="_blank">进入首页</a></font>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -218,7 +222,7 @@
 		</div>
 	</div>
 	<div region="south" style="height: 25px;padding: 5px" align="center">
-		Copyright © 2012-2018 程序员小冰 版权所有</div>
+		Copyright © 2012-2019 程序员小冰 版权所有</div>
 
 	<div id="dlg" class="easyui-dialog"
 		style="width:400px;height:200px;padding: 10px 20px" closed="true"

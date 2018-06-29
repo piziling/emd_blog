@@ -27,6 +27,18 @@ public class Blog implements Serializable {
 	private Integer blogCount;// 文章数量 非文章实际属性，主要是根据发布日期归档查询文章数量用
 	private String releaseDateStr;// 发布日期字符串 只去年和月
 	private String keyWord;// 关键字，空格 隔开
+	// 文章格式，比如是ue或者md
+	private String blogFormat;
+	
+	
+
+	public String getBlogFormat() {
+		return blogFormat;
+	}
+
+	public void setBlogFormat(String blogFormat) {
+		this.blogFormat = blogFormat;
+	}
 
 	private List<String> imagesList = new ArrayList<String>();// 文章里存在的图片
 																// 主要用于列表展示显示缩略图
