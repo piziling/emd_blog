@@ -1,5 +1,6 @@
 package com.david.emdblog.web.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.david.emdblog.entity.Blog;
 import com.david.emdblog.lucene.BlogIndex;
 import com.david.emdblog.service.BlogService;
 import com.david.emdblog.service.CommentService;
+import com.david.emdblog.utils.MarkdownToHtmlUtil;
 import com.david.emdblog.utils.UtilFuns;
 
 /**
@@ -45,10 +47,14 @@ public class BlogController {
 	 * 请求文章的详细信息。。使用resuful
 	 */
 	@RequestMapping("/articles/{id}")
-	public ModelAndView details(@PathVariable("id") Integer id, HttpServletRequest request) {
+	public ModelAndView details(@PathVariable("id") Integer id, HttpServletRequest request) throws IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		// 根据id查询文章的详情
 		Blog blog = blogService.findById(id);
+//		if (blog.getBlogFormat().equals("md")) {
+//			// 如果是markdown的文章，则需要转换html
+//			blog.setContent(MarkdownToHtmlUtil.mdToHtml(blog.getContentNoTag()));
+//		}
 		// 得到关键词
 		String keyWords = blog.getKeyWord();
 		if (UtilFuns.isNotEmpty(keyWords)) {

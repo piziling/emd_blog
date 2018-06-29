@@ -164,7 +164,14 @@
 				<a href="javascript:openTab('写文章','writeBlog.jsp','icon-writeblog')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-writeblog'"
-					style="width: 150px;">写文章</a><a
+					style="width: 150px;">写文章</a>
+					
+					<a href="javascript:openTab('写文章(Markdown)','mdwriteblog.jsp','icon-writeblog')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-writeblog'"
+					style="width: 150px;">写文章(Markdown)</a>
+					
+					<a
 					href="javascript:openTab('文章信息管理','blogManage.jsp','icon-bkgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">文章信息管理</a>
