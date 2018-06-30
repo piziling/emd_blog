@@ -49,6 +49,28 @@
 </script>
 </head>
 <body style="margin: 10px">
+
+	<div id="dateDemo" style="display:none;">
+    hadoop命令需在hadoop目录下使用
+**常用命令**
+    
+    HDFS格式化:
+    bin/hadoop namenode -format    格式化namenode
+    bin/hadoop datanode -format    格式化datanode
+    
+    *如不是第一次格式化，为了保证clusterID一致性,
+    *需先删除hdfs临时目录,
+    *即在配置文件中配置的hadoop.tmp.dir参数路径
+		
+
+`图片展示1`
+[![这里是描述](http://pic41.nipic.com/20140529/18243620_101015342117_2.gif "这里是描述")](这里是链接地址 "这里是描述")
+
+[========]
+图片展示2
+![](http://pic41.nipic.com/20140529/18243620_101015342117_2.gif)
+	</div>
+
 <div id="p" class="easyui-panel" title="修改文章" style="padding: 10px">
  	<table cellspacing="20px">
    		<tr>
@@ -99,7 +121,9 @@
                 async : false,  
                 data:{"id":"${param.id}"},
                 onsuccess:function(result){
-                	result = eval("(" + result.responseText + ")");  
+                	alert(result);
+                	result = eval("(" + result.responseText + ")");
+                	alert(result);
                 	$("#title").val(result.title);
                 	$("#keyWord").val(result.keyWord);
        				$("#blogTypeId").combobox("setValue",result.blogType.id);
