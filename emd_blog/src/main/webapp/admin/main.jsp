@@ -150,10 +150,16 @@
 		<div class="easyui-accordion" data-options="fit:true,border:false">
 			<div title="常用操作" data-options="selected:true,iconCls:'icon-item'"
 				style="padding: 10px">
-				<a href="javascript:openTab('写文章','writeBlog.jsp','icon-writeblog')"
+				<a href="javascript:openTab('写文章(UE)','writeBlog.jsp','icon-writeblog')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-writeblog'"
-					style="width: 150px">写文章</a> <a
+					style="width: 150px">写文章(UE)</a>
+					
+					<a href="javascript:openTab('写文章(Markdown)','mdwriteblog.jsp','icon-writeblog')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-writeblog'"
+					style="width: 150px;">写文章(Markdown)</a>
+					 <a
 					href="javascript:openTab('评论审核','commentReview.jsp','icon-review')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-review'"
@@ -161,10 +167,10 @@
 			</div>
 			<div title="文章管理" data-options="iconCls:'icon-bkgl'"
 				style="padding:10px;">
-				<a href="javascript:openTab('写文章','writeBlog.jsp','icon-writeblog')"
+				<a href="javascript:openTab('写文章(UE)','writeBlog.jsp','icon-writeblog')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-writeblog'"
-					style="width: 150px;">写文章</a>
+					style="width: 150px;">写文章(UE)</a>
 					
 					<a href="javascript:openTab('写文章(Markdown)','mdwriteblog.jsp','icon-writeblog')"
 					class="easyui-linkbutton"

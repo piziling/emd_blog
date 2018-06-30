@@ -60,7 +60,13 @@
 			 return;
 		 }
 		 var row=selectedRows[0];
-		 window.parent.openTab('修改文章','modifyBlog.jsp?id='+row.id,'icon-writeblog');
+		 if(row.blogFormat=="ue"){
+			 // ue跳转到ue的页面
+			 window.parent.openTab('修改文章','modifyBlog.jsp?id='+row.id,'icon-writeblog');
+		 }else{
+			 // 带有md,则需要跳转到markdown的修改页面
+			 window.parent.openTab('修改文章','mdmodifyBlog.jsp?id='+row.id,'icon-writeblog');
+		 }
 	}
 	
 </script>
