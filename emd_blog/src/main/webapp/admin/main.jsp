@@ -164,6 +164,20 @@
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-review'"
 					style="width: 150px">评论审核</a>
+					
+					<a
+					href="javascript:openTab('文章信息管理','blogManage.jsp','icon-bkgl')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">文章信息管理</a>
+					
+					<a href="javascript:openTab('友情链接管理','linkManage.jsp','icon-link')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
+					
+					<a href="javascript:refreshSystem()"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-refresh'"
+					style="width: 150px;">刷新系统缓存</a> 
 			</div>
 			<div title="文章管理" data-options="iconCls:'icon-bkgl'"
 				style="padding:10px;">
