@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ import com.david.emdblog.entity.Comment;
 import com.david.emdblog.entity.PageBean;
 import com.david.emdblog.lucene.BlogIndex;
 import com.david.emdblog.service.BlogService;
+import com.david.emdblog.utils.FileUtil;
+import com.david.emdblog.utils.HtmlUtil;
 import com.david.emdblog.utils.ResponseUtils;
 import com.david.emdblog.utils.UtilFuns;
 
@@ -157,13 +160,32 @@ public class BlogAdminController {
 	 * 根据ID删除实例.因为可能批量删除，所以用数组
 	 */
 	@RequestMapping("/delete")
-	public String delete(@RequestParam(value = "ids", required = true) String ids, HttpServletResponse response)
-			throws Exception {
+	public String delete(@RequestParam(value = "ids", required = true) String ids, HttpServletResponse response,
+			HttpServletRequest request) throws Exception {
 		String[] idsStr = ids.split(",");
 		for (int i = 0; i < idsStr.length; i++) {
+			// 根据ID取出文章详情。
+			Blog blogInfo = blogService.findById(Integer.parseInt(idsStr[i]));
+			// 得到图片在服务器的地址，然后循环删除
+			List<String> imgList = HtmlUtil.getImagesByHTML(blogInfo.getContent());
+			// 删除 对应的图片。减少服务器空间..必须要先删除图片，再去删除文章
+			// E:\Download_workspace\emd_blog\emd_blog\src\main\webapp\
+			String filePath = request.getServletContext().getRealPath("/");
+			if (imgList != null && imgList.size() > 0) {
+				for (int j = 0; j < imgList.size(); j++) {
+					System.out.println(filePath);
+					System.out.println(imgList.size());
+					// 进行转换斜杠，并截取。具体看htmlutil工具类
+					String imagePath = imgList.get(j).replace("/", "\\");
+					imagePath = imagePath.substring(10, imagePath.length());
+					System.out.println(filePath + imagePath);
+					FileUtil.deleteFile(filePath + imagePath);
+				}
+			}
 			blogService.deleteById(Integer.parseInt(idsStr[i]));
 			try {
-				blogIndex.deleteIndex(idsStr[i]);// 删除对应的文章的索引
+				// 删除对应的文章的索引
+				blogIndex.deleteIndex(idsStr[i]);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

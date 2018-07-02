@@ -121,9 +121,7 @@
                 async : false,  
                 data:{"id":"${param.id}"},
                 onsuccess:function(result){
-                	alert(result);
                 	result = eval("(" + result.responseText + ")");
-                	alert(result);
                 	$("#title").val(result.title);
                 	$("#keyWord").val(result.keyWord);
        				$("#blogTypeId").combobox("setValue",result.blogType.id);

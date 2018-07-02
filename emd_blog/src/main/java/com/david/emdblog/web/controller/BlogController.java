@@ -47,14 +47,16 @@ public class BlogController {
 	 * 请求文章的详细信息。。使用resuful
 	 */
 	@RequestMapping("/articles/{id}")
-	public ModelAndView details(@PathVariable("id") Integer id, HttpServletRequest request) throws IOException {
+	public ModelAndView details(@PathVariable("id") Integer id, HttpServletRequest request,HttpServletResponse response) throws IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		// 根据id查询文章的详情
 		Blog blog = blogService.findById(id);
-//		if (blog.getBlogFormat().equals("md")) {
-//			// 如果是markdown的文章，则需要转换html
-//			blog.setContent(MarkdownToHtmlUtil.mdToHtml(blog.getContentNoTag()));
-//		}
+		if (blog==null) {
+			// 如果查找不到blog详情，则说明不存在，直接返回404页面
+//			response.sendError(404);
+			modelAndView.setViewName("static/error/404");
+			return modelAndView;
+		}
 		// 得到关键词
 		String keyWords = blog.getKeyWord();
 		if (UtilFuns.isNotEmpty(keyWords)) {
