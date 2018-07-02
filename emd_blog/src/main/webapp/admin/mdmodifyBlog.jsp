@@ -257,10 +257,10 @@
 		}else{
 			$.post("${pageContext.request.contextPath}/admin/blog/saveMarkdownBlog.do",{'id':'${param.id}','title':title,'blogType.id':blogTypeId,'content':contentHtml,'contentNoTag':mardownText,'summary':mardownText.substr(0,155),'keyWord':keyWord},function(result){
 				if(result.success){
-					alert("文章发布成功！");
+					alert("文章修改成功！");
 					resetValue();
 				}else{
-					alert("文章发布失败！");
+					alert("文章修改失败！");
 				}
 			},"json");
 		}
