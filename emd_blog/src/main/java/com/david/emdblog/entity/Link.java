@@ -1,11 +1,14 @@
 package com.david.emdblog.entity;
+
+import java.io.Serializable;
+
 /**
  * 友情链接的实体类
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
  */
-public class Link {
+public class Link implements Serializable {
 	private Integer id;//编号
 	private String linkName;//链接名称
 	private String linkUrl;//链接地址

@@ -1,5 +1,6 @@
 package com.david.emdblog.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
  */
-public class Comment {
+public class Comment implements Serializable {
 	private Integer id;//编号
 	private String userIp;//用户评论者的ip
 	private String content;//评论内容
