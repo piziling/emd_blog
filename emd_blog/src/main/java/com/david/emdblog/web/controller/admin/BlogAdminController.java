@@ -90,6 +90,7 @@ public class BlogAdminController {
 	public String saveMarkdownBlog(Blog blog, HttpServletResponse response) throws Exception {
 		int resultTotal = 0;// 操作的记录条数
 		blog.setBlogFormat("md");
+//		System.out.println("blog::::"+blog);
 		if (blog.getId() == null) {
 			// 则说明是新增
 			resultTotal = blogService.add(blog);

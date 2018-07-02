@@ -77,42 +77,6 @@
 		<div id="dateDemo" style="display:none;">
 	</div>
 
-	<script type="text/javascript">
-	function submitData(){
-		var title=$("#title").val();
-		var blogTypeId=$("#blogTypeId").combobox("getValue");
-		//获取Markdown内容
-		var content=testEditor.getHTML();
-		var keyWord=$("#keyWord").val();
-		
-		if(title==null || title==''){
-			alert("请输入文章标题！");
-		}else if(blogTypeId==null || blogTypeId==''){
-			alert("请选择文章类别！");
-		}else if(content==null || content==''){
-			alert("请输入内容！");
-		}else{
-			$.post("${pageContext.request.contextPath}/admin/blog/saveMarkdownBlog.do",{'title':title,'blogType.id':blogTypeId,'content':content,'contentNoTag':testEditor.getMarkdown(),'summary':testEditor.getMarkdown().substr(0,155),'keyWord':keyWord},function(result){
-				if(result.success){
-					alert("文章发布成功！");
-					resetValue();
-				}else{
-					alert("文章发布失败！");
-				}
-			},"json");
-		}
-	}
-	
-	// 重置数据
-	function resetValue(){
-		$("#title").val("");
-		$("#blogTypeId").combobox("setValue","");
-		$("#dateDemo").html()
-		$("#keyWord").val("");
-	}
-	
-</script>
-
 <script type="text/javascript">
 
     //实例化要编辑的文章内容
@@ -265,7 +229,8 @@
             
         	//提交日志
             $("#submit_blog").bind('click', function() {
-            	submitData();
+            	// 将markdown的html和md格式传送到提交函数
+            	submitData(testEditor.getHTML(),testEditor.getMarkdown());
             	
             });
     		//================== 功能结束=======================
@@ -274,6 +239,42 @@
 	    
 	}
    
+    
+    
+    function submitData(contentHtml,mardownText){
+		var title=$("#title").val();
+		var blogTypeId=$("#blogTypeId").combobox("getValue");
+		//获取Markdown内容
+		/* var content=testEditor.getHTML(); */
+		var keyWord=$("#keyWord").val();
+		
+		if(title==null || title==''){
+			alert("请输入文章标题！");
+		}else if(blogTypeId==null || blogTypeId==''){
+			alert("请选择文章类别！");
+		}else if(contentHtml==null || contentHtml==''){
+			alert("请输入内容！");
+		}else{
+			$.post("${pageContext.request.contextPath}/admin/blog/saveMarkdownBlog.do",{'id':'${param.id}','title':title,'blogType.id':blogTypeId,'content':contentHtml,'contentNoTag':mardownText,'summary':mardownText.substr(0,155),'keyWord':keyWord},function(result){
+				if(result.success){
+					alert("文章发布成功！");
+					resetValue();
+				}else{
+					alert("文章发布失败！");
+				}
+			},"json");
+		}
+	}
+	
+	// 重置数据
+	function resetValue(){
+		$("#title").val("");
+		$("#blogTypeId").combobox("setValue","");
+		$("#dateDemo").html()
+		$("#keyWord").val("");
+	}
+	
+	
 </script>
 </body>
 </html>

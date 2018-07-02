@@ -50,7 +50,7 @@
 </head>
 <body style="margin: 10px">
 
-	<div id="dateDemo" style="display:none;">
+<!-- 	<div id="dateDemo" style="display:none;">
     hadoop命令需在hadoop目录下使用
 **常用命令**
     
@@ -69,7 +69,7 @@
 [========]
 图片展示2
 ![](http://pic41.nipic.com/20140529/18243620_101015342117_2.gif)
-	</div>
+	</div> -->
 
 <div id="p" class="easyui-panel" title="修改文章" style="padding: 10px">
  	<table cellspacing="20px">
