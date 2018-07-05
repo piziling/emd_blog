@@ -22,7 +22,7 @@
 
 	<!-- redis单机版 -->
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-		<constructor-arg name="host" value="192.168.1.184" />
+		<constructor-arg name="host" value="192.168.1.204" />
 		<constructor-arg name="port" value="6379" />
 		<!--final GenericObjectPoolConfig poolConfig, final String host, int port, 
 			int timeout, final String password) -->
