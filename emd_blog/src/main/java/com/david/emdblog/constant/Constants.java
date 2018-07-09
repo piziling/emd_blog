@@ -19,4 +19,6 @@ public class Constants {
 	public static String constant_LUCENE = "D:\\lucene";
 	/* \emd_blog\static\serImages\20160224\1456310792100080598.jpg*/
 	public static String delImagePath = "E:\\Download_workspace\\emd_blog\\emd_blog\\src\\main\\webapp\\static\\userImages";
+	// markdown 上传的图片地址。
+	public static String MARKDOWN_UPLOAD_IMAGEPATH = "E:\\Download_workspace\\emd_blog\\emd_blog\\src\\main\\webapp\\static\\userImages\\markdownuploadimages\\";
 }

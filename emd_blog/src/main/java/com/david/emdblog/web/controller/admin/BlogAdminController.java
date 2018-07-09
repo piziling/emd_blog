@@ -180,7 +180,10 @@ public class BlogAdminController {
 					String imagePath = imgList.get(j).replace("/", "\\");
 					imagePath = imagePath.substring(10, imagePath.length());
 					System.out.println(filePath + imagePath);
-					FileUtil.deleteFile(filePath + imagePath);
+					// 如果存在文件才会去删除。否则不执行删除命令
+					if (FileUtil.isFileExist((filePath+imagePath))) {
+						FileUtil.deleteFile(filePath + imagePath);
+					}
 				}
 			}
 			blogService.deleteById(Integer.parseInt(idsStr[i]));
