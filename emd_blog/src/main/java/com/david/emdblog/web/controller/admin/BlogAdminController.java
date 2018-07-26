@@ -90,15 +90,26 @@ public class BlogAdminController {
 	public String saveMarkdownBlog(Blog blog, HttpServletResponse response) throws Exception {
 		int resultTotal = 0;// 操作的记录条数
 		blog.setBlogFormat("md");
-//		System.out.println("blog::::"+blog);
+		// System.out.println("blog::::"+blog);
 		if (blog.getId() == null) {
-			// 则说明是新增
-			resultTotal = blogService.add(blog);
-			blogIndex.addIndex(blog);// 添加文章索引
+
+			try {
+				// 则说明是新增
+				resultTotal = blogService.add(blog);
+				// 添加文章索引
+				blogIndex.addIndex(blog);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
-			// 则说明是更新文章
-			resultTotal = blogService.update(blog);
-			blogIndex.updateIndex(blog);// 更新文章索引
+			try {
+				// 则说明是更新文章
+				resultTotal = blogService.update(blog);
+				blogIndex.updateIndex(blog);// 更新文章索引
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 		JSONObject jsonObject = new JSONObject();
 		if (resultTotal > 0) {
@@ -181,7 +192,7 @@ public class BlogAdminController {
 					imagePath = imagePath.substring(10, imagePath.length());
 					System.out.println(filePath + imagePath);
 					// 如果存在文件才会去删除。否则不执行删除命令
-					if (FileUtil.isFileExist((filePath+imagePath))) {
+					if (FileUtil.isFileExist((filePath + imagePath))) {
 						FileUtil.deleteFile(filePath + imagePath);
 					}
 				}
