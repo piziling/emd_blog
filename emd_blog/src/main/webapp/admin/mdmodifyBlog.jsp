@@ -152,7 +152,7 @@
                     //dialogMaskBgColor : "#000",	// 设置透明遮罩层的背景颜色，全局通用，默认为#fff
                     imageUpload : true,
                     imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                    imageUploadURL : "./file/upload",//文件上传的后台请求地址
+                    imageUploadURL : "./mdFileUploadImage/uploadMarkdownImage.do",//文件上传的后台请求地址
     				toolbarIcons : function() {//设置需要的工具图标,这个可以不写使用默认的
     					var tool=["undo", "redo", "|", "bold","del","italic", "quote","ucwords","uppercase","lowercase","|",
     					"h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","|","link","reference-link","image","code",
