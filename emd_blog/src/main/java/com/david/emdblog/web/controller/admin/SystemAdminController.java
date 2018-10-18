@@ -47,7 +47,7 @@ public class SystemAdminController {
 	
 	@Resource(name="bloggerService")
 	private BloggerService bloggerService;
-	// 博客索引
+	// 文章索引
 	private BlogIndex blogIndex = new BlogIndex();
 	/**
 	 * 刷新系统缓存
@@ -61,11 +61,11 @@ public class SystemAdminController {
 		//查询所有文章类别以及对应的数量
 		List<BlogType> blogTypeCountList = blogTypeService.countList();
 		applicationContext.setAttribute("blogTypeCountList", blogTypeCountList);
-		//根据日期分组查询博客,所有文章以及对应的数量
-		List<Blog> blogCountList = blogService.countList();//根据日期分组查询文章。博客
+		//根据日期分组查询文章,所有文章以及对应的数量
+		List<Blog> blogCountList = blogService.countList();
 		applicationContext.setAttribute("blogCountList", blogCountList);
 		//获取所有友情链接
-		List<Link> linkList = linkService.list(null);//获取所有友情链接
+		List<Link> linkList = linkService.list(null);
 		applicationContext.setAttribute("linkList",linkList);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("success", true);

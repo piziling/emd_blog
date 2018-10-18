@@ -52,7 +52,7 @@ import com.david.emdblog.utils.DateUtil;
 import com.david.emdblog.utils.UtilFuns;
 
 /**
- * 博客索引类
+ * 文章索引类
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -61,41 +61,52 @@ import com.david.emdblog.utils.UtilFuns;
 public class BlogIndex {
 
 	/**
-	 * 更新文章博客索引
+	 * 更新文章文章索引
 	 */
 	public void updateIndex(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
 		Document document = new Document();
 		document.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
 		document.add(new TextField("title", blog.getTitle(), Field.Store.YES));
-//		document.add(new StringField("releaseDate", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
+		// document.add(new StringField("releaseDate", DateUtil.formatDate(new Date(),
+		// "yyyy-MM-dd"), Field.Store.YES));
 		document.add(new StringField("releaseDate", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
 		document.add(new TextField("content", blog.getContentNoTag(), Field.Store.YES));
 		writer.updateDocument(new Term("id", String.valueOf(blog.getId())), document);
 		if (writer != null) {
 			writer.close();
+			writer = null;
+			if (indexWriter != null) {
+				indexWriter.close();
+				indexWriter = null;
+			}
 		}
 	}
 
 	/**
-	 * 删除指定文章博客的索引
+	 * 删除指定文章文章的索引
 	 */
 	public void deleteIndex(String blogId) throws Exception {
-		IndexWriter indexWriter = getWriter();
-		indexWriter.deleteDocuments(new Term("id", blogId));
-		indexWriter.forceMergeDeletes();// 强制删除
-		indexWriter.commit();
-		if (indexWriter != null) {
-			indexWriter.close();
+		IndexWriter writer = getWriter();
+		writer.deleteDocuments(new Term("id", blogId));
+		writer.forceMergeDeletes();// 强制删除
+		writer.commit();
+		if (writer != null) {
+			writer.close();
+			writer = null;
+			if (indexWriter != null) {
+				indexWriter.close();
+				indexWriter = null;
+			}
 		}
 	}
 
 	/**
-	 * 添加博客索引
+	 * 添加文章索引
 	 */
 	public void addIndex(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
-//		System.out.println(blog);
+		// System.out.println(blog);
 		Document document = new Document();
 		document.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
 		document.add(new TextField("title", blog.getTitle(), Field.Store.YES));
@@ -104,19 +115,22 @@ public class BlogIndex {
 		writer.addDocument(document);
 		if (writer != null) {
 			writer.close();
-			indexWriter.close();
-			indexWriter = null;
 			writer = null;
+			if (indexWriter != null) {
+				indexWriter.close();
+				indexWriter = null;
+			}
 		}
 	}
-	
+
 	/**
-	 * 添加博客索引
+	 * 添加文章索引
 	 */
 	public void addIndexNotClosed(Blog blog) throws Exception {
 		IndexWriter writer = getWriter();
-//		System.out.println("data:"+  DateUtil.formatDate(blog.getReleaseDate(), "yyyy-MM-dd"));
-//		System.out.println("data:"+blog.getReleaseDate());
+		// System.out.println("data:"+ DateUtil.formatDate(blog.getReleaseDate(),
+		// "yyyy-MM-dd"));
+		// System.out.println("data:"+blog.getReleaseDate());
 		Document document = new Document();
 		document.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
 		document.add(new TextField("title", blog.getTitle(), Field.Store.YES));
@@ -125,14 +139,15 @@ public class BlogIndex {
 		writer.addDocument(document);
 		if (writer != null) {
 			writer.close();
-			indexWriter.close();
-			indexWriter = null;
 			writer = null;
+			if (indexWriter != null) {
+				indexWriter.close();
+				indexWriter = null;
+			}
 		}
-//		System.out.println("添加索引成功");
+		// System.out.println("添加索引成功");
 	}
-	
-	
+
 	/**
 	 * 删除全部索引
 	 */
@@ -146,9 +161,11 @@ public class BlogIndex {
 		// 关闭
 		if (writer != null) {
 			writer.close();
-			indexWriter.close();
-			indexWriter = null;
 			writer = null;
+			if (indexWriter != null) {
+				indexWriter.close();
+				indexWriter = null;
+			}
 		}
 	}
 
@@ -170,7 +187,7 @@ public class BlogIndex {
 	}
 
 	/**
-	 * 查询博客信息
+	 * 查询文章信息
 	 * 
 	 * @param q
 	 *            查询关键字
@@ -178,7 +195,6 @@ public class BlogIndex {
 	 * @throws Exception
 	 */
 	public List<Blog> searchBlog(String q) throws Exception {
-		IndexWriter writer = getWriter();
 		directory = FSDirectory.open(Paths.get(Constants.constant_LUCENE));
 
 		IndexReader reader = DirectoryReader.open(directory);
@@ -251,8 +267,8 @@ public class BlogIndex {
 			// 不等于空，则说明连接成功 Statement是用来向数据库发送要执行的SQL语句的！
 			/*
 			 * 二、对数据库做增、删、改 1. 通过Connection对象创建Statement >
-			 * Statement语句的发送器，它的功能就是向数据库发送sql语句！ 2. 调用它的int
-			 * executeUpdate(String sql)，它可以发送DML、DDL
+			 * Statement语句的发送器，它的功能就是向数据库发送sql语句！ 2. 调用它的int executeUpdate(String
+			 * sql)，它可以发送DML、DDL
 			 */
 			Statement createStatement = connection.createStatement();
 			/**

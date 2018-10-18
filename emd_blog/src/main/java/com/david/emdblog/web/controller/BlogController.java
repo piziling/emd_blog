@@ -1,5 +1,6 @@
 package com.david.emdblog.web.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +21,11 @@ import com.david.emdblog.entity.Blog;
 import com.david.emdblog.lucene.BlogIndex;
 import com.david.emdblog.service.BlogService;
 import com.david.emdblog.service.CommentService;
+import com.david.emdblog.utils.MarkdownToHtmlUtil;
 import com.david.emdblog.utils.UtilFuns;
 
 /**
- * 博客文章的controller。主要是前端
+ * 文章的controller。主要是前端
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -38,17 +40,23 @@ public class BlogController {
 
 	@Resource(name = "commentService")
 	private CommentService commentService;
-	// 博客索引
+	// 文章索引
 	private BlogIndex blogIndex = new BlogIndex();
 
 	/**
 	 * 请求文章的详细信息。。使用resuful
 	 */
 	@RequestMapping("/articles/{id}")
-	public ModelAndView details(@PathVariable("id") Integer id, HttpServletRequest request) {
+	public ModelAndView details(@PathVariable("id") Integer id, HttpServletRequest request,HttpServletResponse response) throws IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		// 根据id查询文章的详情
 		Blog blog = blogService.findById(id);
+		if (blog==null) {
+			// 如果查找不到blog详情，则说明不存在，直接返回404页面
+//			response.sendError(404);
+			modelAndView.setViewName("static/error/404");
+			return modelAndView;
+		}
 		// 得到关键词
 		String keyWords = blog.getKeyWord();
 		if (UtilFuns.isNotEmpty(keyWords)) {
@@ -60,7 +68,7 @@ public class BlogController {
 			modelAndView.addObject("keyWords", null);
 		}
 		modelAndView.addObject("blog", blog);
-		// 博客点击次数加1
+		// 文章点击次数加1
 		blog.setClickHit(blog.getClickHit() + 1);
 		blogService.update(blog);
 		Map<String, Object> map = new HashMap();

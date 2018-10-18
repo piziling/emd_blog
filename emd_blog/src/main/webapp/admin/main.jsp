@@ -126,8 +126,10 @@
 				<td width="50%"><img alt="logo"
 					src="${pageContext.request.contextPath}/static/images/logo.png">
 				</td>
+			
 				<td valign="bottom" align="right" width="50%"><font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${currentUser.userName }</font>
 				</td>
+				
 			</tr>
 		</table>
 	</div>
@@ -135,8 +137,12 @@
 		<div class="easyui-tabs" fit="true" border="false" id="tabs">
 			<div title="首页" data-options="iconCls:'icon-home'">
 				<div align="center" style="padding-top: 100px">
-					<font color="red" size="10">欢迎使用程序员小冰后台博客管理系统</font>
+					<font color="red" size="5">欢迎使用程序员小冰后台博客管理系统</font>
 				</div>
+				<div align="center" style="padding-top: 100px">
+					<font color="red" size="5"><a  href="${pageContext.request.contextPath}/index.html" target="_blank">进入首页</a></font>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -144,26 +150,53 @@
 		<div class="easyui-accordion" data-options="fit:true,border:false">
 			<div title="常用操作" data-options="selected:true,iconCls:'icon-item'"
 				style="padding: 10px">
-				<a href="javascript:openTab('写文章','writeBlog.jsp','icon-writeblog')"
+				<a href="javascript:openTab('写文章(UE)','writeBlog.jsp','icon-writeblog')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-writeblog'"
-					style="width: 150px">写文章</a> <a
+					style="width: 150px">写文章(UE)</a>
+					
+					<a href="javascript:openTab('写文章(Markdown)','mdwriteblog.jsp','icon-writeblog')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-writeblog'"
+					style="width: 150px;">写文章(Markdown)</a>
+					 <a
 					href="javascript:openTab('评论审核','commentReview.jsp','icon-review')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-review'"
 					style="width: 150px">评论审核</a>
+					
+					<a
+					href="javascript:openTab('文章信息管理','blogManage.jsp','icon-bkgl')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">文章信息管理</a>
+					
+					<a href="javascript:openTab('友情链接管理','linkManage.jsp','icon-link')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
+					
+					<a href="javascript:refreshSystem()"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-refresh'"
+					style="width: 150px;">刷新系统缓存</a> 
 			</div>
-			<div title="博客管理" data-options="iconCls:'icon-bkgl'"
+			<div title="文章管理" data-options="iconCls:'icon-bkgl'"
 				style="padding:10px;">
-				<a href="javascript:openTab('写文章','writeBlog.jsp','icon-writeblog')"
+				<a href="javascript:openTab('写文章(UE)','writeBlog.jsp','icon-writeblog')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-writeblog'"
-					style="width: 150px;">写文章</a><a
+					style="width: 150px;">写文章(UE)</a>
+					
+					<a href="javascript:openTab('写文章(Markdown)','mdwriteblog.jsp','icon-writeblog')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-writeblog'"
+					style="width: 150px;">写文章(Markdown)</a>
+					
+					<a
 					href="javascript:openTab('文章信息管理','blogManage.jsp','icon-bkgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">文章信息管理</a>
 			</div>
-			<div title="博客类别管理" data-options="iconCls:'icon-bklb'"
+			<div title="文章类别管理" data-options="iconCls:'icon-bklb'"
 				style="padding:10px">
 				<a
 					href="javascript:openTab('文章类别管理','blogTypeManage.jsp','icon-bklb')"
@@ -216,7 +249,7 @@
 		</div>
 	</div>
 	<div region="south" style="height: 25px;padding: 5px" align="center">
-		Copyright © 2012-2018 程序员小冰 版权所有</div>
+		Copyright © 2012-2019 程序员小冰 版权所有</div>
 
 	<div id="dlg" class="easyui-dialog"
 		style="width:400px;height:200px;padding: 10px 20px" closed="true"

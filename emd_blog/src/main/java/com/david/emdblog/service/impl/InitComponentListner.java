@@ -21,7 +21,7 @@ import com.david.emdblog.service.BloggerService;
 import com.david.emdblog.service.LinkService;
 
 /**
- * 初始化组件 把博主信息 根据博客类别分类信息 根据日期归档分类信息 存放到application中，用以提供页面请求性能
+ * 初始化组件 把博主信息 根据文章类别分类信息 根据日期归档分类信息 存放到application中，用以提供页面请求性能
  *
  */
 @Component
@@ -42,11 +42,11 @@ public class InitComponentListner implements ServletContextListener, Application
 		blogger.setPassword(null);
 		application.setAttribute("blogger", blogger);
 
-		// 查询博客类别以及博客文章数量
+		// 查询文章类别以及文章数量
 		BlogTypeService blogTypeService = (BlogTypeService) applicationContext.getBean("blogTypeService");
 		List<BlogType> blogTypeCountList = blogTypeService.countList();
 		application.setAttribute("blogTypeCountList", blogTypeCountList);
-		// 根据日期分组查询文章博客
+		// 根据日期分组查询文章
 		BlogService blogService = (BlogService) applicationContext.getBean("blogService");
 		List<Blog> blogCountList = blogService.countList();
 		application.setAttribute("blogCountList", blogCountList);

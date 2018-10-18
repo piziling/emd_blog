@@ -6,7 +6,7 @@ import java.util.Map;
 import com.david.emdblog.entity.BlogType;
 
 /**
- * 博客类型Dao接口
+ * 文章类型Dao接口
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
@@ -14,12 +14,12 @@ import com.david.emdblog.entity.BlogType;
  */
 public interface BlogTypeDao {
 	/**
-	 * 根据ID查询博客类型
+	 * 根据ID查询文章类型
 	 */
 	public BlogType findById(Integer id);
 
 	/**
-	 * 查询所有博客类别以及对应的数量
+	 * 查询所有文章类别以及对应的数量
 	 */
 	public List<BlogType> countList();
 

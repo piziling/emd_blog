@@ -50,7 +50,7 @@ public class CommentController {
 			comment.setUserIp(userIp);
 			if (comment.getId() == null) {
 				resultNum = commentService.add(comment);
-				//添加完评论之后，我们需要将博客的回复次数加1
+				//添加完评论之后，我们需要将文章的回复次数加1
 				Blog blog = blogService.findById(comment.getBlog().getId());
 				blog.setReplyHit(blog.getReplyHit()+1);
 				blogService.update(blog);

@@ -1,5 +1,7 @@
 package com.david.emdblog.entity;
 
+import java.io.Serializable;
+
 /**
  * 分页Model类 * @Author ：程序员小冰
  * 
@@ -7,7 +9,7 @@ package com.david.emdblog.entity;
  * @GitHub: https://github.com/QQ986945193
  */
 
-public class PageBean {
+public class PageBean implements Serializable {
 	private int page; // 第几页
 	private int pageSize; // 每页记录数
 	private int start; // 起始页

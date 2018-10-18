@@ -69,7 +69,7 @@ public class IndexController {
 			map.put("releaseDateStr", releaseDateStr);
 		} else {
 			System.out.println("releaseDateStrbuweikong:"+releaseDateStr+"date;"+CharsetUtils.getGetMethodParameter(releaseDateStr));
-			map.put("releaseDateStr",releaseDateStr);// 按日期查询
+			map.put("releaseDateStr",CharsetUtils.getGetMethodParameter(releaseDateStr));// 按日期查询
 		}
 
 		// 获取日志列表。里面有设置redis缓存

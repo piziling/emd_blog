@@ -20,6 +20,9 @@ public class ResponseUtils {
 		PrintWriter out = response.getWriter();
 		out.println(o.toString());
 		out.flush();
-		out.close();
+		if (out != null) {
+			out.close();
+		}
+
 	}
 }

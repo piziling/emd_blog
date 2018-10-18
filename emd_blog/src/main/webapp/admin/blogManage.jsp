@@ -60,7 +60,13 @@
 			 return;
 		 }
 		 var row=selectedRows[0];
-		 window.parent.openTab('修改文章','modifyBlog.jsp?id='+row.id,'icon-writeblog');
+		 if(row.blogFormat=="ue"){
+			 // ue跳转到ue的页面
+			 window.parent.openTab('修改文章','modifyBlog.jsp?id='+row.id,'icon-writeblog');
+		 }else{
+			 // 带有md,则需要跳转到markdown的修改页面
+			 window.parent.openTab('修改文章','mdmodifyBlog.jsp?id='+row.id,'icon-writeblog');
+		 }
 	}
 	
 </script>
@@ -76,6 +82,7 @@
    		<th field="title" width="200" align="center" formatter="formatTitle">标题</th>
    		<th field="releaseDate" width="50" align="center">发布日期</th>
    		<th field="blogType" width="50" align="center" formatter="formatBlogType">文章类别</th>
+   		<th field="blogFormat" width="50" align="center">文章格式</th>
    	</tr>
    </thead>
  </table>
