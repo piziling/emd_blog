@@ -329,7 +329,7 @@
 					<version>2.2</version>
 					<!-- 端口 -->
 					<configuration>
-						<port>80</port>
+						<port>380</port>
 						<!-- 访问路径 -->
 						<!-- <path>/</path> -->
 						<!-- <contextReloadable>true</contextReloadable> -->
